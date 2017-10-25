@@ -1,25 +1,27 @@
 ﻿Version=7.01
-NumberOfModules=1
+NumberOfModules=2
 Module1=Starter
-Build1=Default,b4a.example
+Module2=extra
+Build1=Default,manini.b4a.example
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~
 IconFile=
-NumberOfFiles=0
+NumberOfFiles=1
+File1=loading.bal
 NumberOfLibraries=1
 Library1=core
 @EndOfDesignText@
 #Region  Project Attributes 
-	#ApplicationLabel: B4A Example
+	#ApplicationLabel: Manini
 	#VersionCode: 1
 	#VersionName: 
 	'SupportedOrientations possible values: unspecified, landscape or portrait.
-	#SupportedOrientations: unspecified
+	#SupportedOrientations: portrait
 	#CanInstallToExternalStorage: False
 #End Region
 
 #Region  Activity Attributes 
-	#FullScreen: False
-	#IncludeTitle: True
+	#FullScreen: True
+	#IncludeTitle:  False
 #End Region
 
 Sub Process_Globals
@@ -32,12 +34,13 @@ Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
 
+	Private logo As ImageView
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
-	'Activity.LoadLayout("Layout1")
-
+	Activity.LoadLayout("loading")
+	logo.Bitmap = LoadBitmap ( File.DirAssets,"fileset/logo.png")
 End Sub
 
 Sub Activity_Resume
