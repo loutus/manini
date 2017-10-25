@@ -20,9 +20,46 @@ Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
 	Activity.LoadLayout("index")
 	'index_ScrollView.Panel.LoadLayout("indexdata")
-	index_draw("medium")
-	index_draw("medium")
-	index_draw("larg")
+	index_draw("larg",1)
+	index_draw("small",2)
+	index_draw("small",3)
+	index_draw("small",4)
+	index_draw("medium",5)
+	index_draw("small",6)
+	index_draw("small",7)
+	index_draw("small",8)
+	index_draw("medium",9)
+	index_draw("small",10)
+	index_draw("larg",1)
+	index_draw("small",2)
+	index_draw("small",3)
+	index_draw("small",4)
+	index_draw("medium",5)
+	index_draw("small",6)
+	index_draw("small",7)
+	index_draw("small",8)
+	index_draw("medium",9)
+	index_draw("small",10)
+	index_draw("larg",1)
+	index_draw("small",2)
+	index_draw("small",3)
+	index_draw("small",4)
+	index_draw("medium",5)
+	index_draw("small",6)
+	index_draw("small",7)
+	index_draw("small",8)
+	index_draw("medium",9)
+	index_draw("small",10)
+	index_draw("larg",1)
+	index_draw("small",2)
+	index_draw("small",3)
+	index_draw("small",4)
+	index_draw("medium",5)
+	index_draw("small",6)
+	index_draw("small",7)
+	index_draw("small",8)
+	index_draw("medium",9)
+	index_draw("small",10)
 	extra.load_index
 	Dim r As Reflector
 	r.Target = index_ScrollView
@@ -34,40 +71,97 @@ End Sub
 Sub Activity_Pause (UserClosed As Boolean)
 End Sub
 Sub jobdone(job As HttpJob)
-	If job.Success = True Then 
-		If job.JobName = "load_indexjob" Then 
-			Log(job.GetString)
-		End If
-	End If
+'	If job.Success = True Then 
+'		If job.JobName = "load_indexjob" Then 
+'			Dim parser As JSONParser
+'			parser.Initialize(job.GetString)
+'			Dim root As List = parser.NextArray
+'			For Each colroot As Int In root
+'				index_draw("small")
+'			Next
+'		End If
+'	End If
 End Sub
-Sub index_draw(size As String)
+Sub index_draw(size As String,flag)
+	Dim space As Int = 2dip
+	Dim padding_space As Int = 2dip
 	If size="larg" Then 
-		Dim left_draw As Int = 10dip
-		Dim top_draw As Int = 10dip
-		Dim width_draw As Int = 100%x
-		Dim space As Int = 5dip
+		Dim left_draw As Int = padding_space
+		Dim width_draw As Int = 100%x - left_draw
 		Dim shadow_space As Int = 5dip
+		extra.index_ob_olaviyat(flag) = 1
+		extra.index_ob_top_cach =  width_draw
 	End If
 	If size="medium" Then
-		Dim left_draw As Int = 10dip
-		Dim top_draw As Int = 10dip
-		Dim width_draw As Int = 50%x
-		Dim space As Int = 5dip
-		Dim shadow_space As Int = 15dip
+		Select extra.index_ob_olaviyat(flag-1)
+			Case 111
+				Dim left_draw As Int = 66.4%x  + padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_top_cach =  width_draw
+			Case 11
+				Dim left_draw As Int = 33.2%x + padding_space
+				Dim width_draw As Int = 66%x+ padding_space
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=222
+				extra.index_ob_top_cach = 0
+			Case 1
+				Dim left_draw As Int = padding_space
+				Dim width_draw As Int = 66%x   + padding_space
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=22
+				extra.index_ob_top_cach = 0
+		End Select
 	End If
-	
-'	Dim shadow As ImageView
-'	shadow.Initialize("shadow")
-'	shadow.Bitmap = LoadBitmap(File.DirAssets,"shadowbox.png")
-	'shadow.Gravity = Gravity.FILL
-'	index_ScrollView.Panel.AddView(shadow,shadow_space,shadow_space,width_draw-shadow_space,width_draw-shadow_space)
+	If size="small" Then
+		Select extra.index_ob_olaviyat(flag-1)
+			Case 222
+				Dim left_draw As Int =  padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_top = extra.index_ob_top + 33.2%x
+				extra.index_ob_olaviyat(flag)=1
+				extra.index_ob_top_cach = width_draw
+			Case 221
+				Dim left_draw As Int = 66.4%x  + padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_top = extra.index_ob_top + 33.2%x
+				extra.index_ob_olaviyat(flag)=1
+				extra.index_ob_top_cach = width_draw
+			Case 22
+				Dim left_draw As Int = 66.4%x  + padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=221
+				extra.index_ob_top_cach = 0
+			Case 111
+				Dim left_draw As Int = 66.4%x  + padding_space
+				Dim width_draw As Int = 33.2%x 
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=1
+				extra.index_ob_top_cach =  width_draw
+			Case 11
+				Dim left_draw As Int = 33.2%x + padding_space
+				Dim width_draw As Int = 33.2%x  
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=111
+				extra.index_ob_top_cach = 0
+			Case 1
+				Dim left_draw As Int = padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=11
+				extra.index_ob_top_cach = 0
+		End Select
+	End If
 	Dim panel As Panel
 	panel.Initialize("panel")
-	panel.Color = Colors.White
+	panel.Color = Colors.DarkGray
 	Dim cd As ColorDrawable
 	'cd.Initialize (Colors.White,10dip)
 	'panel.Background = cd
-	index_ScrollView.Panel.AddView(panel,left_draw,extra.index_ob_top +  top_draw,width_draw-space,width_draw-space)
-	
-	extra.index_ob_top =extra.index_ob_top +  width_draw
+	index_ScrollView.Panel.AddView(panel,left_draw,extra.index_ob_top + space,width_draw-space,width_draw-space)
+	extra.index_ob_top = extra.index_ob_top + extra.index_ob_top_cach
+	index_ScrollView.Panel.Height = extra.index_ob_top  +space 
 End Sub

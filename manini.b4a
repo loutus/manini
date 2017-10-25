@@ -11,10 +11,11 @@ File1=index.bal
 File2=loading.bal
 File3=shadowbox.png
 File4=yekan.ttf
-NumberOfLibraries=3
+NumberOfLibraries=4
 Library1=core
 Library2=okhttputils2
 Library3=reflection
+Library4=json
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Manini
