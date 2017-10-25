@@ -9,4 +9,12 @@ Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
 	Dim api As String = "http://itrx.babapkg.ir/api.php"
+	Dim index_ob_top As Int = 0
 End Sub
+
+Sub load_index()
+	Dim load_indexjob As HttpJob
+	load_indexjob.Initialize("load_indexjob",index)
+	load_indexjob.PostString(api,"op=index")
+End Sub
+

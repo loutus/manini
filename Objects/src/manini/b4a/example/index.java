@@ -14,8 +14,8 @@ import anywheresoftware.b4a.B4AUncaughtException;
 import anywheresoftware.b4a.debug.*;
 import java.lang.ref.WeakReference;
 
-public class main extends Activity implements B4AActivity{
-	public static main mostCurrent;
+public class index extends Activity implements B4AActivity{
+	public static index mostCurrent;
 	static boolean afterFirstLayout;
 	static boolean isFirst = true;
     private static boolean processGlobalsRun = false;
@@ -32,7 +32,7 @@ public class main extends Activity implements B4AActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (isFirst) {
-			processBA = new BA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.main");
+			processBA = new BA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.index");
 			processBA.loadHtSubs(this.getClass());
 	        float deviceScale = getApplicationContext().getResources().getDisplayMetrics().density;
 	        BALayout.setDeviceScale(deviceScale);
@@ -41,7 +41,7 @@ public class main extends Activity implements B4AActivity{
 		else if (previousOne != null) {
 			Activity p = previousOne.get();
 			if (p != null && p != this) {
-                BA.LogInfo("Killing previous instance (main).");
+                BA.LogInfo("Killing previous instance (index).");
 				p.finish();
 			}
 		}
@@ -83,7 +83,7 @@ public class main extends Activity implements B4AActivity{
 	private void afterFirstLayout() {
         if (this != mostCurrent)
 			return;
-		activityBA = new BA(this, layout, processBA, "manini.b4a.example", "manini.b4a.example.main");
+		activityBA = new BA(this, layout, processBA, "manini.b4a.example", "manini.b4a.example.index");
         
         processBA.sharedProcessBA.activityBA = new java.lang.ref.WeakReference<BA>(activityBA);
         anywheresoftware.b4a.objects.ViewWrapper.lastId = 0;
@@ -92,19 +92,19 @@ public class main extends Activity implements B4AActivity{
         if (BA.isShellModeRuntimeCheck(processBA)) {
 			if (isFirst)
 				processBA.raiseEvent2(null, true, "SHELL", false);
-			processBA.raiseEvent2(null, true, "CREATE", true, "manini.b4a.example.main", processBA, activityBA, _activity, anywheresoftware.b4a.keywords.Common.Density, mostCurrent);
+			processBA.raiseEvent2(null, true, "CREATE", true, "manini.b4a.example.index", processBA, activityBA, _activity, anywheresoftware.b4a.keywords.Common.Density, mostCurrent);
 			_activity.reinitializeForShell(activityBA, "activity");
 		}
         initializeProcessGlobals();		
         initializeGlobals();
         
-        BA.LogInfo("** Activity (main) Create, isFirst = " + isFirst + " **");
+        BA.LogInfo("** Activity (index) Create, isFirst = " + isFirst + " **");
         processBA.raiseEvent2(null, true, "activity_create", false, isFirst);
 		isFirst = false;
 		if (this != mostCurrent)
 			return;
         processBA.setActivityPaused(false);
-        BA.LogInfo("** Activity (main) Resume **");
+        BA.LogInfo("** Activity (index) Resume **");
         processBA.raiseEvent(null, "activity_resume");
         if (android.os.Build.VERSION.SDK_INT >= 11) {
 			try {
@@ -193,7 +193,7 @@ public class main extends Activity implements B4AActivity{
 		}
 	}
     public static Class<?> getObject() {
-		return main.class;
+		return index.class;
 	}
     private Boolean onKeySubExist = null;
     private Boolean onKeyUpSubExist = null;
@@ -262,7 +262,7 @@ public class main extends Activity implements B4AActivity{
         if (_activity == null) //workaround for emulator bug (Issue 2423)
             return;
 		anywheresoftware.b4a.Msgbox.dismiss(true);
-        BA.LogInfo("** Activity (main) Pause, UserClosed = " + activityBA.activity.isFinishing() + " **");
+        BA.LogInfo("** Activity (index) Pause, UserClosed = " + activityBA.activity.isFinishing() + " **");
         processBA.raiseEvent2(_activity, true, "activity_pause", false, activityBA.activity.isFinishing());		
         processBA.setActivityPaused(true);
         mostCurrent = null;
@@ -298,7 +298,7 @@ public class main extends Activity implements B4AActivity{
 			if (mostCurrent == null || mostCurrent != activity.get())
 				return;
 			processBA.setActivityPaused(false);
-            BA.LogInfo("** Activity (main) Resume **");
+            BA.LogInfo("** Activity (index) Resume **");
 		    processBA.raiseEvent(mostCurrent._activity, "activity_resume", (Object[])null);
 		}
     }
@@ -321,120 +321,126 @@ public class main extends Activity implements B4AActivity{
     }
 
 public anywheresoftware.b4a.keywords.Common __c = null;
-public anywheresoftware.b4a.objects.Timer _timer_cheknet = null;
-public anywheresoftware.b4a.objects.ImageViewWrapper _logo = null;
-public anywheresoftware.b4a.objects.LabelWrapper _loadding_text = null;
+public anywheresoftware.b4a.objects.ScrollViewWrapper _index_scrollview = null;
 public anywheresoftware.b4a.samples.httputils2.httputils2service _httputils2service = null;
+public manini.b4a.example.main _main = null;
 public manini.b4a.example.starter _starter = null;
 public manini.b4a.example.extra _extra = null;
-public manini.b4a.example.index _index = null;
 
-public static boolean isAnyActivityVisible() {
-    boolean vis = false;
-vis = vis | (main.mostCurrent != null);
-vis = vis | (index.mostCurrent != null);
-return vis;}
+public static void initializeProcessGlobals() {
+             try {
+                Class.forName(BA.applicationContext.getPackageName() + ".main").getMethod("initializeProcessGlobals").invoke(null, null);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+}
 public static String  _activity_create(boolean _firsttime) throws Exception{
- //BA.debugLineNum = 29;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 31;BA.debugLine="Activity.LoadLayout(\"loading\")";
-mostCurrent._activity.LoadLayout("loading",mostCurrent.activityBA);
- //BA.debugLineNum = 32;BA.debugLine="logo.Bitmap = LoadBitmap ( File.DirAssets,\"filese";
-mostCurrent._logo.setBitmap((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"fileset/logo.png").getObject()));
- //BA.debugLineNum = 33;BA.debugLine="timer_cheknet.Initialize(\"timer_cheknet\",4000)";
-mostCurrent._timer_cheknet.Initialize(processBA,"timer_cheknet",(long) (4000));
- //BA.debugLineNum = 34;BA.debugLine="timer_cheknet.Enabled = True";
-mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.True);
- //BA.debugLineNum = 35;BA.debugLine="End Sub";
+anywheresoftware.b4a.agraham.reflection.Reflection _r = null;
+ //BA.debugLineNum = 14;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+ //BA.debugLineNum = 16;BA.debugLine="Activity.LoadLayout(\"index\")";
+mostCurrent._activity.LoadLayout("index",mostCurrent.activityBA);
+ //BA.debugLineNum = 18;BA.debugLine="index_draw(\"medium\")";
+_index_draw("medium");
+ //BA.debugLineNum = 19;BA.debugLine="index_draw(\"medium\")";
+_index_draw("medium");
+ //BA.debugLineNum = 20;BA.debugLine="index_draw(\"larg\")";
+_index_draw("larg");
+ //BA.debugLineNum = 21;BA.debugLine="extra.load_index";
+mostCurrent._extra._load_index(mostCurrent.activityBA);
+ //BA.debugLineNum = 22;BA.debugLine="Dim r As Reflector";
+_r = new anywheresoftware.b4a.agraham.reflection.Reflection();
+ //BA.debugLineNum = 23;BA.debugLine="r.Target = index_ScrollView";
+_r.Target = (Object)(mostCurrent._index_scrollview.getObject());
+ //BA.debugLineNum = 24;BA.debugLine="r.RunMethod2(\"setVerticalScrollBarEnabled\", False";
+_r.RunMethod2("setVerticalScrollBarEnabled",BA.ObjectToString(anywheresoftware.b4a.keywords.Common.False),"java.lang.boolean");
+ //BA.debugLineNum = 25;BA.debugLine="r.RunMethod2(\"setOverScrollMode\", 2, \"java.lang.i";
+_r.RunMethod2("setOverScrollMode",BA.NumberToString(2),"java.lang.int");
+ //BA.debugLineNum = 26;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 60;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 62;BA.debugLine="End Sub";
+ //BA.debugLineNum = 29;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 30;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 56;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 58;BA.debugLine="End Sub";
-return "";
-}
-public static String  _cheknet() throws Exception{
-anywheresoftware.b4a.samples.httputils2.httpjob _cheknetjob = null;
- //BA.debugLineNum = 51;BA.debugLine="Sub cheknet()";
- //BA.debugLineNum = 52;BA.debugLine="Dim cheknetjob As HttpJob";
-_cheknetjob = new anywheresoftware.b4a.samples.httputils2.httpjob();
- //BA.debugLineNum = 53;BA.debugLine="cheknetjob.Initialize(\"cheknet\",Me)";
-_cheknetjob._initialize(processBA,"cheknet",main.getObject());
- //BA.debugLineNum = 54;BA.debugLine="cheknetjob.PostString(extra.api,\"op=cheknet\")";
-_cheknetjob._poststring(mostCurrent._extra._api,"op=cheknet");
- //BA.debugLineNum = 55;BA.debugLine="End Sub";
+ //BA.debugLineNum = 27;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 28;BA.debugLine="End Sub";
 return "";
 }
 public static String  _globals() throws Exception{
- //BA.debugLineNum = 21;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 24;BA.debugLine="Dim timer_cheknet As Timer";
-mostCurrent._timer_cheknet = new anywheresoftware.b4a.objects.Timer();
- //BA.debugLineNum = 25;BA.debugLine="Private logo As ImageView";
-mostCurrent._logo = new anywheresoftware.b4a.objects.ImageViewWrapper();
- //BA.debugLineNum = 26;BA.debugLine="Private loadding_text As Label";
-mostCurrent._loadding_text = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 27;BA.debugLine="End Sub";
+ //BA.debugLineNum = 9;BA.debugLine="Sub Globals";
+ //BA.debugLineNum = 12;BA.debugLine="Private index_ScrollView As ScrollView";
+mostCurrent._index_scrollview = new anywheresoftware.b4a.objects.ScrollViewWrapper();
+ //BA.debugLineNum = 13;BA.debugLine="End Sub";
+return "";
+}
+public static String  _index_draw(String _size) throws Exception{
+int _left_draw = 0;
+int _top_draw = 0;
+int _width_draw = 0;
+int _space = 0;
+int _shadow_space = 0;
+anywheresoftware.b4a.objects.PanelWrapper _panel = null;
+anywheresoftware.b4a.objects.drawable.ColorDrawable _cd = null;
+ //BA.debugLineNum = 38;BA.debugLine="Sub index_draw(size As String)";
+ //BA.debugLineNum = 39;BA.debugLine="If size=\"larg\" Then";
+if ((_size).equals("larg")) { 
+ //BA.debugLineNum = 40;BA.debugLine="Dim left_draw As Int = 10dip";
+_left_draw = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (10));
+ //BA.debugLineNum = 41;BA.debugLine="Dim top_draw As Int = 10dip";
+_top_draw = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (10));
+ //BA.debugLineNum = 42;BA.debugLine="Dim width_draw As Int = 100%x";
+_width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (100),mostCurrent.activityBA);
+ //BA.debugLineNum = 43;BA.debugLine="Dim space As Int = 5dip";
+_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5));
+ //BA.debugLineNum = 44;BA.debugLine="Dim shadow_space As Int = 5dip";
+_shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5));
+ };
+ //BA.debugLineNum = 46;BA.debugLine="If size=\"medium\" Then";
+if ((_size).equals("medium")) { 
+ //BA.debugLineNum = 47;BA.debugLine="Dim left_draw As Int = 10dip";
+_left_draw = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (10));
+ //BA.debugLineNum = 48;BA.debugLine="Dim top_draw As Int = 10dip";
+_top_draw = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (10));
+ //BA.debugLineNum = 49;BA.debugLine="Dim width_draw As Int = 50%x";
+_width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (50),mostCurrent.activityBA);
+ //BA.debugLineNum = 50;BA.debugLine="Dim space As Int = 5dip";
+_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5));
+ //BA.debugLineNum = 51;BA.debugLine="Dim shadow_space As Int = 15dip";
+_shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
+ };
+ //BA.debugLineNum = 59;BA.debugLine="Dim panel As Panel";
+_panel = new anywheresoftware.b4a.objects.PanelWrapper();
+ //BA.debugLineNum = 60;BA.debugLine="panel.Initialize(\"panel\")";
+_panel.Initialize(mostCurrent.activityBA,"panel");
+ //BA.debugLineNum = 61;BA.debugLine="panel.Color = Colors.White";
+_panel.setColor(anywheresoftware.b4a.keywords.Common.Colors.White);
+ //BA.debugLineNum = 62;BA.debugLine="Dim cd As ColorDrawable";
+_cd = new anywheresoftware.b4a.objects.drawable.ColorDrawable();
+ //BA.debugLineNum = 65;BA.debugLine="index_ScrollView.Panel.AddView(panel,left_draw,ex";
+mostCurrent._index_scrollview.getPanel().AddView((android.view.View)(_panel.getObject()),_left_draw,(int) (mostCurrent._extra._index_ob_top+_top_draw),(int) (_width_draw-_space),(int) (_width_draw-_space));
+ //BA.debugLineNum = 66;BA.debugLine="extra.index_ob_top =extra.index_ob_top +  width_d";
+mostCurrent._extra._index_ob_top = (int) (mostCurrent._extra._index_ob_top+_width_draw);
+ //BA.debugLineNum = 67;BA.debugLine="End Sub";
 return "";
 }
 public static String  _jobdone(anywheresoftware.b4a.samples.httputils2.httpjob _job) throws Exception{
- //BA.debugLineNum = 36;BA.debugLine="Sub jobdone(job As HttpJob)";
- //BA.debugLineNum = 37;BA.debugLine="If job.Success = True Then";
+ //BA.debugLineNum = 31;BA.debugLine="Sub jobdone(job As HttpJob)";
+ //BA.debugLineNum = 32;BA.debugLine="If job.Success = True Then";
 if (_job._success==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 38;BA.debugLine="If job.JobName = \"cheknet\" Then";
-if ((_job._jobname).equals("cheknet")) { 
- //BA.debugLineNum = 39;BA.debugLine="If job.GetString = \"ok\" Then";
-if ((_job._getstring()).equals("ok")) { 
- //BA.debugLineNum = 40;BA.debugLine="Log(job.GetString)";
+ //BA.debugLineNum = 33;BA.debugLine="If job.JobName = \"load_indexjob\" Then";
+if ((_job._jobname).equals("load_indexjob")) { 
+ //BA.debugLineNum = 34;BA.debugLine="Log(job.GetString)";
 anywheresoftware.b4a.keywords.Common.Log(_job._getstring());
- //BA.debugLineNum = 41;BA.debugLine="timer_cheknet.Enabled = False";
-mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 42;BA.debugLine="StartActivity(index)";
-anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._index.getObject()));
- //BA.debugLineNum = 43;BA.debugLine="Activity.Finish";
-mostCurrent._activity.Finish();
- }else {
- //BA.debugLineNum = 45;BA.debugLine="loadding_text.Text = \"اتصال خود به اینترنت را";
-mostCurrent._loadding_text.setText(BA.ObjectToCharSequence("اتصال خود به اینترنت را چک کنید"));
- //BA.debugLineNum = 46;BA.debugLine="timer_cheknet.Enabled = True";
-mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.True);
  };
  };
- };
- //BA.debugLineNum = 50;BA.debugLine="End Sub";
+ //BA.debugLineNum = 37;BA.debugLine="End Sub";
 return "";
 }
-
-public static void initializeProcessGlobals() {
-    
-    if (main.processGlobalsRun == false) {
-	    main.processGlobalsRun = true;
-		try {
-		        anywheresoftware.b4a.samples.httputils2.httputils2service._process_globals();
-main._process_globals();
-starter._process_globals();
-extra._process_globals();
-index._process_globals();
-		
-        } catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-    }
-}public static String  _process_globals() throws Exception{
- //BA.debugLineNum = 15;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 19;BA.debugLine="End Sub";
-return "";
-}
-public static String  _timer_cheknet_tick() throws Exception{
- //BA.debugLineNum = 63;BA.debugLine="Sub timer_cheknet_Tick";
- //BA.debugLineNum = 64;BA.debugLine="Log(\"tick\")";
-anywheresoftware.b4a.keywords.Common.Log("tick");
- //BA.debugLineNum = 65;BA.debugLine="cheknet";
-_cheknet();
- //BA.debugLineNum = 66;BA.debugLine="End Sub";
+public static String  _process_globals() throws Exception{
+ //BA.debugLineNum = 5;BA.debugLine="Sub Process_Globals";
+ //BA.debugLineNum = 8;BA.debugLine="End Sub";
 return "";
 }
 }
