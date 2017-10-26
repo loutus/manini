@@ -43,32 +43,32 @@ Sub jobdone(job As HttpJob)
 			index_retrive_list= parser.NextArray
 			
 			Log(extra.image_address &  index_retrive_list.Get(2))
-			For  i = 1 To 50
+			For  i = 1 To 11
 				Select extra.index_ob_olaviyat(i-1)
 					Case 1
 						Dim x As Int = Rnd(1,5)
 						If x = 1 Then 
 							index_draw("larg",i)
-							Log("larg")
+							'Log("larg")
 						End If
 						If x = 2 Then
 							index_draw("medium",i)
-							Log("medium")
+							'Log("medium")
 						End If
 						If x = 3 Then
 							index_draw("small",i)
-							Log("small")
+							'Log("small")
 						End If
 						If x = 4 Then
 							extra.index_ob_olaviyat(i-1) = 4
 							index_draw("medium",i)
-							Log("medium 4 ")
+							'Log("medium 4 ")
 						End If
 					Case 22
 						index_draw("small",i)
 					Case 225
 						index_draw("small",i)
-						Log("225")
+						'Log("225")
 					Case 224
 						index_draw("small",i)
 					Case 223
@@ -84,7 +84,6 @@ Sub jobdone(job As HttpJob)
 					Case 111
 						index_draw("small",i)
 				End Select
-			 
 			Next
 		End If
 	End If
@@ -124,7 +123,6 @@ Sub index_draw(size As String,flag)
 				extra.index_ob_olaviyat(flag)=222
 				extra.index_ob_top_cach = 0
 				panel.Color = Colors.Green
-	
 			Case 1
 				Dim left_draw As Int = padding_space
 				Dim width_draw As Int = 66.4%x   
@@ -145,7 +143,7 @@ Sub index_draw(size As String,flag)
 				extra.index_ob_olaviyat(flag)=1
 				extra.index_ob_top_cach = width_draw
 				panel.Color = Colors.rgb(255, 51, 0) ' range
-				Log("225 ok")
+				'Log("225 ok")
 			Case 224
 				Dim left_draw As Int =  padding_space
 				Dim width_draw As Int = 33.2%x
