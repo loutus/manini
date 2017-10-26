@@ -9,9 +9,10 @@ Sub Process_Globals
 	'These global variables will be declared once when the application starts.
 	'These variables can be accessed from all modules.
 	Dim api As String = "http://itrx.babapkg.ir/api.php"
+	Dim image_address As String = "http://itrx.babapkg.ir/image/"
 	Dim index_ob_top As Int = 0
 	Dim index_ob_top_cach As Int =10dip
-	Dim index_ob_olaviyat(50) As Int 
+	Dim index_ob_olaviyat(200) As Int 
 End Sub
 
 Sub load_index()

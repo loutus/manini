@@ -15,51 +15,15 @@ Sub Globals
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
 	Private index_ScrollView As ScrollView
+	Dim index_retrive_list As List
 End Sub
 Sub Activity_Create(FirstTime As Boolean)
-	'Do not forget to load the layout file created with the visual designer. For example:
+	'Do not forget to load the layout file created with the visual designer.
 	Activity.LoadLayout("index")
+	extra.index_ob_olaviyat(0) = 1
 	'index_ScrollView.Panel.LoadLayout("indexdata")
-	index_draw("larg",1)
-	index_draw("small",2)
-	index_draw("small",3)
-	index_draw("small",4)
-	index_draw("medium",5)
-	index_draw("small",6)
-	index_draw("small",7)
-	index_draw("small",8)
-	index_draw("medium",9)
-	index_draw("small",10)
-	index_draw("larg",1)
-	index_draw("small",2)
-	index_draw("small",3)
-	index_draw("small",4)
-	index_draw("medium",5)
-	index_draw("small",6)
-	index_draw("small",7)
-	index_draw("small",8)
-	index_draw("medium",9)
-	index_draw("small",10)
-	index_draw("larg",1)
-	index_draw("small",2)
-	index_draw("small",3)
-	index_draw("small",4)
-	index_draw("medium",5)
-	index_draw("small",6)
-	index_draw("small",7)
-	index_draw("small",8)
-	index_draw("medium",9)
-	index_draw("small",10)
-	index_draw("larg",1)
-	index_draw("small",2)
-	index_draw("small",3)
-	index_draw("small",4)
-	index_draw("medium",5)
-	index_draw("small",6)
-	index_draw("small",7)
-	index_draw("small",8)
-	index_draw("medium",9)
-	index_draw("small",10)
+ 
+ 
 	extra.load_index
 	Dim r As Reflector
 	r.Target = index_ScrollView
@@ -70,19 +34,64 @@ Sub Activity_Resume
 End Sub
 Sub Activity_Pause (UserClosed As Boolean)
 End Sub
+ 
 Sub jobdone(job As HttpJob)
-'	If job.Success = True Then 
-'		If job.JobName = "load_indexjob" Then 
-'			Dim parser As JSONParser
-'			parser.Initialize(job.GetString)
-'			Dim root As List = parser.NextArray
-'			For Each colroot As Int In root
-'				index_draw("small")
-'			Next
-'		End If
-'	End If
+	If job.Success = True Then
+		If job.JobName = "load_indexjob" Then
+			Dim parser As JSONParser
+			parser.Initialize(job.GetString)
+			index_retrive_list= parser.NextArray
+			
+			Log(extra.image_address &  index_retrive_list.Get(2))
+			For  i = 1 To 50
+				Select extra.index_ob_olaviyat(i-1)
+					Case 1
+						Dim x As Int = Rnd(1,5)
+						If x = 1 Then 
+							index_draw("larg",i)
+							Log("larg")
+						End If
+						If x = 2 Then
+							index_draw("medium",i)
+							Log("medium")
+						End If
+						If x = 3 Then
+							index_draw("small",i)
+							Log("small")
+						End If
+						If x = 4 Then
+							extra.index_ob_olaviyat(i-1) = 4
+							index_draw("medium",i)
+							Log("medium 4 ")
+						End If
+					Case 22
+						index_draw("small",i)
+					Case 225
+						index_draw("small",i)
+						Log("225")
+					Case 224
+						index_draw("small",i)
+					Case 223
+						index_draw("small",i)
+					Case 222
+						index_draw("small",i)
+					Case 221
+						index_draw("small",i)
+					Case 11
+						Dim x As Int = Rnd(1,3)
+						If x = 1 Then  index_draw("small",i)
+						If x = 2 Then  index_draw("medium",i)
+					Case 111
+						index_draw("small",i)
+				End Select
+			 
+			Next
+		End If
+	End If
 End Sub
 Sub index_draw(size As String,flag)
+	Dim panel As Panel
+	panel.Initialize("panel")
 	Dim space As Int = 2dip
 	Dim padding_space As Int = 2dip
 	If size="larg" Then 
@@ -91,73 +100,116 @@ Sub index_draw(size As String,flag)
 		Dim shadow_space As Int = 5dip
 		extra.index_ob_olaviyat(flag) = 1
 		extra.index_ob_top_cach =  width_draw
+		panel.Color = Colors.red
 	End If
 	If size="medium" Then
 		Select extra.index_ob_olaviyat(flag-1)
+			Case 4
+				Dim left_draw As Int = 33.2%x + padding_space
+				Dim width_draw As Int = 66%x+ padding_space
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_olaviyat(flag)=224
+				extra.index_ob_top_cach = 0
+				panel.Color = Colors.Green
 			Case 111
 				Dim left_draw As Int = 66.4%x  + padding_space
 				Dim width_draw As Int = 33.2%x
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_top_cach =  width_draw
+				panel.Color = Colors.Blue
 			Case 11
 				Dim left_draw As Int = 33.2%x + padding_space
 				Dim width_draw As Int = 66%x+ padding_space
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_olaviyat(flag)=222
 				extra.index_ob_top_cach = 0
+				panel.Color = Colors.Green
+	
 			Case 1
 				Dim left_draw As Int = padding_space
-				Dim width_draw As Int = 66%x   + padding_space
+				Dim width_draw As Int = 66.4%x   
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_olaviyat(flag)=22
 				extra.index_ob_top_cach = 0
+				panel.Color = Colors.red
 		End Select
 	End If
 	If size="small" Then
+	
 		Select extra.index_ob_olaviyat(flag-1)
+			Case 225
+				Dim left_draw As Int =  padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_top = extra.index_ob_top 
+				extra.index_ob_olaviyat(flag)=1
+				extra.index_ob_top_cach = width_draw
+				panel.Color = Colors.rgb(255, 51, 0) ' range
+				Log("225 ok")
+			Case 224
+				Dim left_draw As Int =  padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_top = extra.index_ob_top
+				extra.index_ob_olaviyat(flag)=225
+				extra.index_ob_top_cach = width_draw
+				panel.Color = Colors.rgb(0, 51, 0) ' green
+			Case 223
+				Dim left_draw As Int =  padding_space
+				Dim width_draw As Int = 33.2%x
+				Dim shadow_space As Int = 15dip
+				extra.index_ob_top = extra.index_ob_top 
+				extra.index_ob_olaviyat(flag)=1
+				extra.index_ob_top_cach = width_draw
+				panel.Color = Colors.rgb(255, 255, 102) ' yellow
 			Case 222
 				Dim left_draw As Int =  padding_space
 				Dim width_draw As Int = 33.2%x
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_top = extra.index_ob_top + 33.2%x
-				extra.index_ob_olaviyat(flag)=1
-				extra.index_ob_top_cach = width_draw
+				extra.index_ob_olaviyat(flag)=223
+				extra.index_ob_top_cach = 0
+				panel.Color = Colors.red
 			Case 221
 				Dim left_draw As Int = 66.4%x  + padding_space
-				Dim width_draw As Int = 33.2%x
+				Dim width_draw As Int = 33.23%x
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_top = extra.index_ob_top + 33.2%x
 				extra.index_ob_olaviyat(flag)=1
 				extra.index_ob_top_cach = width_draw
+				panel.Color = Colors.Green
 			Case 22
 				Dim left_draw As Int = 66.4%x  + padding_space
 				Dim width_draw As Int = 33.2%x
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_olaviyat(flag)=221
 				extra.index_ob_top_cach = 0
+				panel.Color = Colors.Blue
 			Case 111
 				Dim left_draw As Int = 66.4%x  + padding_space
 				Dim width_draw As Int = 33.2%x 
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_olaviyat(flag)=1
 				extra.index_ob_top_cach =  width_draw
+				panel.Color = Colors.rgb(255, 102, 255)
 			Case 11
-				Dim left_draw As Int = 33.2%x + padding_space
+				Dim left_draw As Int = 33.3%x + padding_space
 				Dim width_draw As Int = 33.2%x  
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_olaviyat(flag)=111
 				extra.index_ob_top_cach = 0
+				panel.Color = Colors.Black
 			Case 1
 				Dim left_draw As Int = padding_space
 				Dim width_draw As Int = 33.2%x
 				Dim shadow_space As Int = 15dip
 				extra.index_ob_olaviyat(flag)=11
 				extra.index_ob_top_cach = 0
+				panel.Color = Colors.DarkGray
 		End Select
 	End If
-	Dim panel As Panel
-	panel.Initialize("panel")
-	panel.Color = Colors.DarkGray
+	
+	
 	Dim cd As ColorDrawable
 	'cd.Initialize (Colors.White,10dip)
 	'panel.Background = cd
