@@ -49,6 +49,18 @@ _load_indexjob._poststring(_api,"op=index");
  //BA.debugLineNum = 20;BA.debugLine="End Sub";
 return "";
 }
+public static String  _load_lastproduct_main(anywheresoftware.b4a.BA _ba) throws Exception{
+anywheresoftware.b4a.samples.httputils2.httpjob _load_category = null;
+ //BA.debugLineNum = 30;BA.debugLine="Sub load_lastproduct_main()";
+ //BA.debugLineNum = 31;BA.debugLine="Dim load_category As HttpJob";
+_load_category = new anywheresoftware.b4a.samples.httputils2.httpjob();
+ //BA.debugLineNum = 32;BA.debugLine="load_category.Initialize(\"load_lastproduct_main\",";
+_load_category._initialize((_ba.processBA == null ? _ba : _ba.processBA),"load_lastproduct_main",(Object)(mostCurrent._index.getObject()));
+ //BA.debugLineNum = 33;BA.debugLine="load_category.PostString(api,\"op=lastproduct\")";
+_load_category._poststring(_api,"op=lastproduct");
+ //BA.debugLineNum = 34;BA.debugLine="End Sub";
+return "";
+}
 public static String  _process_globals() throws Exception{
  //BA.debugLineNum = 3;BA.debugLine="Sub Process_Globals";
  //BA.debugLineNum = 6;BA.debugLine="Dim api As String = \"http://itrx.babapkg.ir/api.p";
@@ -64,7 +76,7 @@ _index_ob_olaviyat = new int[(int) (1000)];
 ;
  //BA.debugLineNum = 11;BA.debugLine="Dim index_ob_olaviyat_load As Int=1";
 _index_ob_olaviyat_load = (int) (1);
- //BA.debugLineNum = 12;BA.debugLine="dim product_id_toshow as Int";
+ //BA.debugLineNum = 12;BA.debugLine="Dim product_id_toshow As Int";
 _product_id_toshow = 0;
  //BA.debugLineNum = 13;BA.debugLine="End Sub";
 return "";

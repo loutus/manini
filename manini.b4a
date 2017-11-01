@@ -7,7 +7,7 @@ Module4=product
 Build1=Default,manini.b4a.example
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~SetApplicationAttribute(android:largeHeap,"true")
 IconFile=
-NumberOfFiles=11
+NumberOfFiles=12
 File1=index.bal
 File2=like.png
 File3=loading.bal
@@ -16,15 +16,19 @@ File5=product.bal
 File6=product_img1.bal
 File7=product_img2.bal
 File8=shadowbox.png
-File9=sharing-interface.png
-File10=Thumbs.db
-File11=yekan.ttf
-NumberOfLibraries=5
+File9=shadowbox-small.png
+File10=sharing-interface.png
+File11=Thumbs.db
+File12=yekan.ttf
+NumberOfLibraries=8
 Library1=core
 Library2=okhttputils2
 Library3=reflection
 Library4=json
 Library5=ahviewpager
+Library6=fontawesome
+Library7=shadow
+Library8=rtljustifytextview
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Manini
@@ -68,8 +72,8 @@ Sub jobdone(job As HttpJob)
 		If job.JobName = "cheknet" Then
 			Log(job.GetString)
 			If job.GetString = "ok" Then
-			
 				timer_cheknet.Enabled = False
+				timer_cheknet.Interval = 0
 				StartActivity(index)
 				Activity.Finish
 			Else

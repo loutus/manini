@@ -398,16 +398,16 @@ return "";
 }
 public static String  _imgdrew_click() throws Exception{
 anywheresoftware.b4a.objects.ImageViewWrapper _imgdre = null;
- //BA.debugLineNum = 314;BA.debugLine="Sub imgdrew_click()";
- //BA.debugLineNum = 315;BA.debugLine="Dim imgdre As ImageView";
+ //BA.debugLineNum = 315;BA.debugLine="Sub imgdrew_click()";
+ //BA.debugLineNum = 316;BA.debugLine="Dim imgdre As ImageView";
 _imgdre = new anywheresoftware.b4a.objects.ImageViewWrapper();
- //BA.debugLineNum = 316;BA.debugLine="imgdre = Sender";
+ //BA.debugLineNum = 317;BA.debugLine="imgdre = Sender";
 _imgdre.setObject((android.widget.ImageView)(anywheresoftware.b4a.keywords.Common.Sender(mostCurrent.activityBA)));
- //BA.debugLineNum = 317;BA.debugLine="extra.product_id_toshow = imgdre.Tag";
+ //BA.debugLineNum = 318;BA.debugLine="extra.product_id_toshow = imgdre.Tag";
 mostCurrent._extra._product_id_toshow = (int)(BA.ObjectToNumber(_imgdre.getTag()));
- //BA.debugLineNum = 318;BA.debugLine="StartActivity(product)";
+ //BA.debugLineNum = 319;BA.debugLine="StartActivity(product)";
 anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._product.getObject()));
- //BA.debugLineNum = 319;BA.debugLine="End Sub";
+ //BA.debugLineNum = 320;BA.debugLine="End Sub";
 return "";
 }
 public static String  _index_draw(String _size,String _flag,String _id,String _img,String _model) throws Exception{
@@ -421,293 +421,293 @@ int _width_draw = 0;
 int _shadow_space = 0;
 anywheresoftware.b4a.objects.drawable.ColorDrawable _cd = null;
 String _imgfile = "";
- //BA.debugLineNum = 149;BA.debugLine="Sub index_draw(size As String,flag,id,img,model)";
- //BA.debugLineNum = 150;BA.debugLine="extra.index_ob_olaviyat_load = flag";
+ //BA.debugLineNum = 150;BA.debugLine="Sub index_draw(size As String,flag,id,img,model)";
+ //BA.debugLineNum = 151;BA.debugLine="extra.index_ob_olaviyat_load = flag";
 mostCurrent._extra._index_ob_olaviyat_load = (int)(Double.parseDouble(_flag));
- //BA.debugLineNum = 151;BA.debugLine="Dim panel As Panel";
+ //BA.debugLineNum = 152;BA.debugLine="Dim panel As Panel";
 _panel = new anywheresoftware.b4a.objects.PanelWrapper();
- //BA.debugLineNum = 152;BA.debugLine="Dim lbl As Label";
+ //BA.debugLineNum = 153;BA.debugLine="Dim lbl As Label";
 _lbl = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 153;BA.debugLine="Dim color As Int";
+ //BA.debugLineNum = 154;BA.debugLine="Dim color As Int";
 _color = 0;
- //BA.debugLineNum = 154;BA.debugLine="color =Colors.White";
+ //BA.debugLineNum = 155;BA.debugLine="color =Colors.White";
 _color = anywheresoftware.b4a.keywords.Common.Colors.White;
- //BA.debugLineNum = 155;BA.debugLine="panel.Initialize(\"panel\")";
+ //BA.debugLineNum = 156;BA.debugLine="panel.Initialize(\"panel\")";
 _panel.Initialize(mostCurrent.activityBA,"panel");
- //BA.debugLineNum = 156;BA.debugLine="lbl.Initialize(\"lbl\")";
+ //BA.debugLineNum = 157;BA.debugLine="lbl.Initialize(\"lbl\")";
 _lbl.Initialize(mostCurrent.activityBA,"lbl");
- //BA.debugLineNum = 157;BA.debugLine="lbl.Text = model";
+ //BA.debugLineNum = 158;BA.debugLine="lbl.Text = model";
 _lbl.setText(BA.ObjectToCharSequence(_model));
- //BA.debugLineNum = 158;BA.debugLine="lbl.TextColor = Colors.White";
+ //BA.debugLineNum = 159;BA.debugLine="lbl.TextColor = Colors.White";
 _lbl.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.White);
- //BA.debugLineNum = 159;BA.debugLine="lbl.Color = Colors.ARGB(140, 140, 140,100)";
+ //BA.debugLineNum = 160;BA.debugLine="lbl.Color = Colors.ARGB(140, 140, 140,100)";
 _lbl.setColor(anywheresoftware.b4a.keywords.Common.Colors.ARGB((int) (140),(int) (140),(int) (140),(int) (100)));
- //BA.debugLineNum = 160;BA.debugLine="Dim space As Int = 2dip";
+ //BA.debugLineNum = 161;BA.debugLine="Dim space As Int = 2dip";
 _space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (2));
- //BA.debugLineNum = 161;BA.debugLine="Dim padding_space As Int = 2dip";
+ //BA.debugLineNum = 162;BA.debugLine="Dim padding_space As Int = 2dip";
 _padding_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (2));
- //BA.debugLineNum = 162;BA.debugLine="If size=\"larg\" Then";
+ //BA.debugLineNum = 163;BA.debugLine="If size=\"larg\" Then";
 if ((_size).equals("larg")) { 
- //BA.debugLineNum = 163;BA.debugLine="Dim left_draw As Int = padding_space";
+ //BA.debugLineNum = 164;BA.debugLine="Dim left_draw As Int = padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 164;BA.debugLine="Dim width_draw As Int = 100%x - left_draw";
+ //BA.debugLineNum = 165;BA.debugLine="Dim width_draw As Int = 100%x - left_draw";
 _width_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (100),mostCurrent.activityBA)-_left_draw);
- //BA.debugLineNum = 165;BA.debugLine="Dim shadow_space As Int = 5dip";
+ //BA.debugLineNum = 166;BA.debugLine="Dim shadow_space As Int = 5dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5));
- //BA.debugLineNum = 166;BA.debugLine="extra.index_ob_olaviyat(flag) = 1";
+ //BA.debugLineNum = 167;BA.debugLine="extra.index_ob_olaviyat(flag) = 1";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (1);
- //BA.debugLineNum = 167;BA.debugLine="extra.index_ob_top_cach =  width_draw";
+ //BA.debugLineNum = 168;BA.debugLine="extra.index_ob_top_cach =  width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 168;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 169;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  };
- //BA.debugLineNum = 170;BA.debugLine="If size=\"medium\" Then";
+ //BA.debugLineNum = 171;BA.debugLine="If size=\"medium\" Then";
 if ((_size).equals("medium")) { 
- //BA.debugLineNum = 171;BA.debugLine="Select extra.index_ob_olaviyat(flag-1)";
+ //BA.debugLineNum = 172;BA.debugLine="Select extra.index_ob_olaviyat(flag-1)";
 switch (BA.switchObjectToInt(mostCurrent._extra._index_ob_olaviyat[(int) ((double)(Double.parseDouble(_flag))-1)],(int) (4),(int) (111),(int) (11),(int) (1))) {
 case 0: {
- //BA.debugLineNum = 173;BA.debugLine="Dim left_draw As Int = 33.2%x + padding_space";
+ //BA.debugLineNum = 174;BA.debugLine="Dim left_draw As Int = 33.2%x + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 174;BA.debugLine="Dim width_draw As Int = 66%x+ padding_space";
+ //BA.debugLineNum = 175;BA.debugLine="Dim width_draw As Int = 66%x+ padding_space";
 _width_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 175;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 176;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 176;BA.debugLine="extra.index_ob_olaviyat(flag)=224";
+ //BA.debugLineNum = 177;BA.debugLine="extra.index_ob_olaviyat(flag)=224";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (224);
- //BA.debugLineNum = 177;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 178;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 178;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 179;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 1: {
- //BA.debugLineNum = 180;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
+ //BA.debugLineNum = 181;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66.4),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 181;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 182;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 182;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 183;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 183;BA.debugLine="extra.index_ob_top_cach =  width_draw";
+ //BA.debugLineNum = 184;BA.debugLine="extra.index_ob_top_cach =  width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 184;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 185;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 2: {
- //BA.debugLineNum = 186;BA.debugLine="Dim left_draw As Int = 33.2%x + padding_space";
+ //BA.debugLineNum = 187;BA.debugLine="Dim left_draw As Int = 33.2%x + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 187;BA.debugLine="Dim width_draw As Int = 66%x+ padding_space";
+ //BA.debugLineNum = 188;BA.debugLine="Dim width_draw As Int = 66%x+ padding_space";
 _width_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 188;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 189;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 189;BA.debugLine="extra.index_ob_olaviyat(flag)=222";
+ //BA.debugLineNum = 190;BA.debugLine="extra.index_ob_olaviyat(flag)=222";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (222);
- //BA.debugLineNum = 190;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 191;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 191;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 192;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 3: {
- //BA.debugLineNum = 193;BA.debugLine="Dim left_draw As Int = padding_space";
+ //BA.debugLineNum = 194;BA.debugLine="Dim left_draw As Int = padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 194;BA.debugLine="Dim width_draw As Int = 66.4%x";
+ //BA.debugLineNum = 195;BA.debugLine="Dim width_draw As Int = 66.4%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66.4),mostCurrent.activityBA);
- //BA.debugLineNum = 195;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 196;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 196;BA.debugLine="extra.index_ob_olaviyat(flag)=22";
+ //BA.debugLineNum = 197;BA.debugLine="extra.index_ob_olaviyat(flag)=22";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (22);
- //BA.debugLineNum = 197;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 198;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 198;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 199;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 }
 ;
  };
- //BA.debugLineNum = 201;BA.debugLine="If size=\"small\" Then";
+ //BA.debugLineNum = 202;BA.debugLine="If size=\"small\" Then";
 if ((_size).equals("small")) { 
- //BA.debugLineNum = 202;BA.debugLine="Select extra.index_ob_olaviyat(flag-1)";
+ //BA.debugLineNum = 203;BA.debugLine="Select extra.index_ob_olaviyat(flag-1)";
 switch (BA.switchObjectToInt(mostCurrent._extra._index_ob_olaviyat[(int) ((double)(Double.parseDouble(_flag))-1)],(int) (225),(int) (224),(int) (223),(int) (222),(int) (221),(int) (22),(int) (111),(int) (11),(int) (1))) {
 case 0: {
- //BA.debugLineNum = 204;BA.debugLine="Dim left_draw As Int =  padding_space";
+ //BA.debugLineNum = 205;BA.debugLine="Dim left_draw As Int =  padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 205;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 206;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 206;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 207;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 207;BA.debugLine="extra.index_ob_top = extra.index_ob_top";
+ //BA.debugLineNum = 208;BA.debugLine="extra.index_ob_top = extra.index_ob_top";
 mostCurrent._extra._index_ob_top = mostCurrent._extra._index_ob_top;
- //BA.debugLineNum = 208;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
+ //BA.debugLineNum = 209;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (1);
- //BA.debugLineNum = 209;BA.debugLine="extra.index_ob_top_cach = width_draw";
+ //BA.debugLineNum = 210;BA.debugLine="extra.index_ob_top_cach = width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 210;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 211;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 1: {
- //BA.debugLineNum = 213;BA.debugLine="Dim left_draw As Int =  padding_space";
+ //BA.debugLineNum = 214;BA.debugLine="Dim left_draw As Int =  padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 214;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 215;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 215;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 216;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 216;BA.debugLine="extra.index_ob_top = extra.index_ob_top";
+ //BA.debugLineNum = 217;BA.debugLine="extra.index_ob_top = extra.index_ob_top";
 mostCurrent._extra._index_ob_top = mostCurrent._extra._index_ob_top;
- //BA.debugLineNum = 217;BA.debugLine="extra.index_ob_olaviyat(flag)=225";
+ //BA.debugLineNum = 218;BA.debugLine="extra.index_ob_olaviyat(flag)=225";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (225);
- //BA.debugLineNum = 218;BA.debugLine="extra.index_ob_top_cach = width_draw";
+ //BA.debugLineNum = 219;BA.debugLine="extra.index_ob_top_cach = width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 219;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 220;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 2: {
- //BA.debugLineNum = 221;BA.debugLine="Dim left_draw As Int =  padding_space";
+ //BA.debugLineNum = 222;BA.debugLine="Dim left_draw As Int =  padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 222;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 223;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 223;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 224;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 224;BA.debugLine="extra.index_ob_top = extra.index_ob_top";
+ //BA.debugLineNum = 225;BA.debugLine="extra.index_ob_top = extra.index_ob_top";
 mostCurrent._extra._index_ob_top = mostCurrent._extra._index_ob_top;
- //BA.debugLineNum = 225;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
+ //BA.debugLineNum = 226;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (1);
- //BA.debugLineNum = 226;BA.debugLine="extra.index_ob_top_cach = width_draw";
+ //BA.debugLineNum = 227;BA.debugLine="extra.index_ob_top_cach = width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 227;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 228;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 3: {
- //BA.debugLineNum = 229;BA.debugLine="Dim left_draw As Int =  padding_space";
+ //BA.debugLineNum = 230;BA.debugLine="Dim left_draw As Int =  padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 230;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 231;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 231;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 232;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 232;BA.debugLine="extra.index_ob_top = extra.index_ob_top + 33.2";
+ //BA.debugLineNum = 233;BA.debugLine="extra.index_ob_top = extra.index_ob_top + 33.2";
 mostCurrent._extra._index_ob_top = (int) (mostCurrent._extra._index_ob_top+anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA));
- //BA.debugLineNum = 233;BA.debugLine="extra.index_ob_olaviyat(flag)=223";
+ //BA.debugLineNum = 234;BA.debugLine="extra.index_ob_olaviyat(flag)=223";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (223);
- //BA.debugLineNum = 234;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 235;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 235;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 236;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 4: {
- //BA.debugLineNum = 237;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
+ //BA.debugLineNum = 238;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66.4),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 238;BA.debugLine="Dim width_draw As Int = 33.23%x";
+ //BA.debugLineNum = 239;BA.debugLine="Dim width_draw As Int = 33.23%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.23),mostCurrent.activityBA);
- //BA.debugLineNum = 239;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 240;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 240;BA.debugLine="extra.index_ob_top = extra.index_ob_top + 33.2";
+ //BA.debugLineNum = 241;BA.debugLine="extra.index_ob_top = extra.index_ob_top + 33.2";
 mostCurrent._extra._index_ob_top = (int) (mostCurrent._extra._index_ob_top+anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA));
- //BA.debugLineNum = 241;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
+ //BA.debugLineNum = 242;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (1);
- //BA.debugLineNum = 242;BA.debugLine="extra.index_ob_top_cach = width_draw";
+ //BA.debugLineNum = 243;BA.debugLine="extra.index_ob_top_cach = width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 243;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 244;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 5: {
- //BA.debugLineNum = 245;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
+ //BA.debugLineNum = 246;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66.4),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 246;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 247;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 247;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 248;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 248;BA.debugLine="extra.index_ob_olaviyat(flag)=221";
+ //BA.debugLineNum = 249;BA.debugLine="extra.index_ob_olaviyat(flag)=221";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (221);
- //BA.debugLineNum = 249;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 250;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 250;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 251;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 6: {
- //BA.debugLineNum = 252;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
+ //BA.debugLineNum = 253;BA.debugLine="Dim left_draw As Int = 66.4%x  + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (66.4),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 253;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 254;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 254;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 255;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 255;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
+ //BA.debugLineNum = 256;BA.debugLine="extra.index_ob_olaviyat(flag)=1";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (1);
- //BA.debugLineNum = 256;BA.debugLine="extra.index_ob_top_cach =  width_draw";
+ //BA.debugLineNum = 257;BA.debugLine="extra.index_ob_top_cach =  width_draw";
 mostCurrent._extra._index_ob_top_cach = _width_draw;
- //BA.debugLineNum = 257;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 258;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 7: {
- //BA.debugLineNum = 259;BA.debugLine="Dim left_draw As Int = 33.3%x + padding_space";
+ //BA.debugLineNum = 260;BA.debugLine="Dim left_draw As Int = 33.3%x + padding_space";
 _left_draw = (int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.3),mostCurrent.activityBA)+_padding_space);
- //BA.debugLineNum = 260;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 261;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 261;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 262;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 262;BA.debugLine="extra.index_ob_olaviyat(flag)=111";
+ //BA.debugLineNum = 263;BA.debugLine="extra.index_ob_olaviyat(flag)=111";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (111);
- //BA.debugLineNum = 263;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 264;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 264;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 265;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 case 8: {
- //BA.debugLineNum = 266;BA.debugLine="Dim left_draw As Int = padding_space";
+ //BA.debugLineNum = 267;BA.debugLine="Dim left_draw As Int = padding_space";
 _left_draw = _padding_space;
- //BA.debugLineNum = 267;BA.debugLine="Dim width_draw As Int = 33.2%x";
+ //BA.debugLineNum = 268;BA.debugLine="Dim width_draw As Int = 33.2%x";
 _width_draw = anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (33.2),mostCurrent.activityBA);
- //BA.debugLineNum = 268;BA.debugLine="Dim shadow_space As Int = 15dip";
+ //BA.debugLineNum = 269;BA.debugLine="Dim shadow_space As Int = 15dip";
 _shadow_space = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (15));
- //BA.debugLineNum = 269;BA.debugLine="extra.index_ob_olaviyat(flag)=11";
+ //BA.debugLineNum = 270;BA.debugLine="extra.index_ob_olaviyat(flag)=11";
 mostCurrent._extra._index_ob_olaviyat[(int)(Double.parseDouble(_flag))] = (int) (11);
- //BA.debugLineNum = 270;BA.debugLine="extra.index_ob_top_cach = 0";
+ //BA.debugLineNum = 271;BA.debugLine="extra.index_ob_top_cach = 0";
 mostCurrent._extra._index_ob_top_cach = (int) (0);
- //BA.debugLineNum = 271;BA.debugLine="panel.Color = color";
+ //BA.debugLineNum = 272;BA.debugLine="panel.Color = color";
 _panel.setColor(_color);
  break; }
 }
 ;
  };
- //BA.debugLineNum = 275;BA.debugLine="Dim cd As ColorDrawable";
+ //BA.debugLineNum = 276;BA.debugLine="Dim cd As ColorDrawable";
 _cd = new anywheresoftware.b4a.objects.drawable.ColorDrawable();
- //BA.debugLineNum = 278;BA.debugLine="lbl.Gravity = Gravity.FILL";
+ //BA.debugLineNum = 279;BA.debugLine="lbl.Gravity = Gravity.FILL";
 _lbl.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.FILL);
- //BA.debugLineNum = 279;BA.debugLine="lbl.Gravity = Gravity.CENTER";
+ //BA.debugLineNum = 280;BA.debugLine="lbl.Gravity = Gravity.CENTER";
 _lbl.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.CENTER);
- //BA.debugLineNum = 280;BA.debugLine="panel.Tag = id";
+ //BA.debugLineNum = 281;BA.debugLine="panel.Tag = id";
 _panel.setTag((Object)(_id));
- //BA.debugLineNum = 284;BA.debugLine="Dim imgfile As String = img.SubString2(img.LastIn";
+ //BA.debugLineNum = 285;BA.debugLine="Dim imgfile As String = img.SubString2(img.LastIn";
 _imgfile = _img.substring((int) (_img.lastIndexOf("/")+1),_img.length());
- //BA.debugLineNum = 286;BA.debugLine="If File.Exists (File.DirInternalCache,\"product/\"";
+ //BA.debugLineNum = 287;BA.debugLine="If File.Exists (File.DirInternalCache,\"product/\"";
 if (anywheresoftware.b4a.keywords.Common.File.Exists(anywheresoftware.b4a.keywords.Common.File.getDirInternalCache(),"product/"+_imgfile)==anywheresoftware.b4a.keywords.Common.False) { 
- //BA.debugLineNum = 288;BA.debugLine="imgdrew(flag).Initialize(\"imgdrew\")";
+ //BA.debugLineNum = 289;BA.debugLine="imgdrew(flag).Initialize(\"imgdrew\")";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].Initialize(mostCurrent.activityBA,"imgdrew");
- //BA.debugLineNum = 289;BA.debugLine="imgdrew(flag).Bitmap = LoadBitmapSample(File.Dir";
+ //BA.debugLineNum = 290;BA.debugLine="imgdrew(flag).Bitmap = LoadBitmapSample(File.Dir";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setBitmap((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmapSample(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"fileset/main_defult_product.jpg",anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (100)),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (100))).getObject()));
- //BA.debugLineNum = 291;BA.debugLine="imgdrew(flag).Tag = id";
+ //BA.debugLineNum = 292;BA.debugLine="imgdrew(flag).Tag = id";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setTag((Object)(_id));
- //BA.debugLineNum = 292;BA.debugLine="imgdrew(flag).Gravity = Gravity.FILL";
+ //BA.debugLineNum = 293;BA.debugLine="imgdrew(flag).Gravity = Gravity.FILL";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setGravity(anywheresoftware.b4a.keywords.Common.Gravity.FILL);
- //BA.debugLineNum = 294;BA.debugLine="extra.download_image(id,img,flag)";
+ //BA.debugLineNum = 295;BA.debugLine="extra.download_image(id,img,flag)";
 mostCurrent._extra._download_image(mostCurrent.activityBA,_id,_img,_flag);
  }else {
- //BA.debugLineNum = 298;BA.debugLine="imgdrew(flag).Initialize(\"imgdrew\")";
+ //BA.debugLineNum = 299;BA.debugLine="imgdrew(flag).Initialize(\"imgdrew\")";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].Initialize(mostCurrent.activityBA,"imgdrew");
- //BA.debugLineNum = 299;BA.debugLine="imgdrew(flag).Bitmap = LoadBitmapSample(File.Dir";
+ //BA.debugLineNum = 300;BA.debugLine="imgdrew(flag).Bitmap = LoadBitmapSample(File.Dir";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setBitmap((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmapSample(anywheresoftware.b4a.keywords.Common.File.getDirInternalCache(),"product/"+_imgfile,anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (100)),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (100))).getObject()));
- //BA.debugLineNum = 300;BA.debugLine="imgdrew(flag).Gravity = Gravity.FILL";
+ //BA.debugLineNum = 301;BA.debugLine="imgdrew(flag).Gravity = Gravity.FILL";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setGravity(anywheresoftware.b4a.keywords.Common.Gravity.FILL);
- //BA.debugLineNum = 301;BA.debugLine="imgdrew(flag).Tag =  id";
+ //BA.debugLineNum = 302;BA.debugLine="imgdrew(flag).Tag =  id";
 mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setTag((Object)(_id));
  };
- //BA.debugLineNum = 305;BA.debugLine="index_ScrollView.Panel.AddView(panel,left_draw,ex";
+ //BA.debugLineNum = 306;BA.debugLine="index_ScrollView.Panel.AddView(panel,left_draw,ex";
 mostCurrent._index_scrollview.getPanel().AddView((android.view.View)(_panel.getObject()),_left_draw,(int) (mostCurrent._extra._index_ob_top+_space),(int) (_width_draw-_space),(int) (_width_draw-_space));
- //BA.debugLineNum = 307;BA.debugLine="index_ScrollView.Panel.AddView(imgdrew(flag),left";
+ //BA.debugLineNum = 308;BA.debugLine="index_ScrollView.Panel.AddView(imgdrew(flag),left";
 mostCurrent._index_scrollview.getPanel().AddView((android.view.View)(mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].getObject()),_left_draw,(int) (mostCurrent._extra._index_ob_top+_space),(int) (_width_draw-_space),(int) (_width_draw-_space));
- //BA.debugLineNum = 309;BA.debugLine="index_ScrollView.Panel.AddView(lbl,left_draw,extr";
+ //BA.debugLineNum = 310;BA.debugLine="index_ScrollView.Panel.AddView(lbl,left_draw,extr";
 mostCurrent._index_scrollview.getPanel().AddView((android.view.View)(_lbl.getObject()),_left_draw,(int) (mostCurrent._extra._index_ob_top+_width_draw-anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (25))),(int) (_width_draw-_space),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (25)));
- //BA.debugLineNum = 310;BA.debugLine="extra.index_ob_top = extra.index_ob_top + extra.i";
+ //BA.debugLineNum = 311;BA.debugLine="extra.index_ob_top = extra.index_ob_top + extra.i";
 mostCurrent._extra._index_ob_top = (int) (mostCurrent._extra._index_ob_top+mostCurrent._extra._index_ob_top_cach);
- //BA.debugLineNum = 311;BA.debugLine="index_ScrollView.Panel.Height = extra.index_ob_to";
+ //BA.debugLineNum = 312;BA.debugLine="index_ScrollView.Panel.Height = extra.index_ob_to";
 mostCurrent._index_scrollview.getPanel().setHeight((int) (mostCurrent._extra._index_ob_top+_space));
- //BA.debugLineNum = 312;BA.debugLine="End Sub";
+ //BA.debugLineNum = 313;BA.debugLine="End Sub";
 return "";
 }
 public static String  _index_scrollview_scrollchanged(int _position) throws Exception{
@@ -771,7 +771,7 @@ mostCurrent._imgdrew[(int)(Double.parseDouble(_flag))].setBitmap((android.graphi
 }
 ;
  };
- //BA.debugLineNum = 148;BA.debugLine="End Sub";
+ //BA.debugLineNum = 149;BA.debugLine="End Sub";
 return "";
 }
 public static String  _load_indexjob(anywheresoftware.b4a.samples.httputils2.httpjob _job,boolean _create) throws Exception{

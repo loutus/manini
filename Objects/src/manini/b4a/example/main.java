@@ -398,8 +398,10 @@ if ((_job._jobname).equals("cheknet")) {
 anywheresoftware.b4a.keywords.Common.Log(_job._getstring());
  //BA.debugLineNum = 42;BA.debugLine="If job.GetString = \"ok\" Then";
 if ((_job._getstring()).equals("ok")) { 
- //BA.debugLineNum = 44;BA.debugLine="timer_cheknet.Enabled = False";
+ //BA.debugLineNum = 43;BA.debugLine="timer_cheknet.Enabled = False";
 mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.False);
+ //BA.debugLineNum = 44;BA.debugLine="timer_cheknet.Interval = 0";
+mostCurrent._timer_cheknet.setInterval((long) (0));
  //BA.debugLineNum = 45;BA.debugLine="StartActivity(index)";
 anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._index.getObject()));
  //BA.debugLineNum = 46;BA.debugLine="Activity.Finish";

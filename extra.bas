@@ -14,7 +14,7 @@ Sub Process_Globals
 	Dim index_ob_top_cach As Int =10dip
 	Dim index_ob_olaviyat(1000) As Int 
 	Dim index_ob_olaviyat_load As Int=1
-	dim product_id_toshow as Int
+	Dim product_id_toshow As Int
 End Sub
 
 Sub load_index()
@@ -30,3 +30,16 @@ Sub download_image(id,path,flag)
 	downloader.Download(image_address & path)
 End Sub
 
+
+ 
+Sub load_lastproduct_main()
+	Dim load_category As HttpJob
+	load_category.Initialize("load_lastproduct_main",index)
+	load_category.PostString(api,"op=lastproduct")
+End Sub
+
+Sub main_download_image(name,image)
+	Dim idownload As HttpJob
+	idownload.Initialize("imageview*" & name & "*" & image,index)
+	idownload.Download(image)
+End Sub

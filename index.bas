@@ -28,7 +28,7 @@ Sub Activity_Create(FirstTime As Boolean)
  	If File.Exists(File.DirInternalCache & "/product","")=False Then 
 		File.MakeDir(File.DirInternalCache,"product"	)
 	End If
- 
+
 	extra.load_index
 	Dim r As Reflector
 	r.Target = index_ScrollView
@@ -148,6 +148,7 @@ If job.Success = True Then
 			Catch
 				'Log(LastException)
 			End Try
+			
 		End Select		
 	End If
 End Sub
