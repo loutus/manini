@@ -262,13 +262,13 @@ Sub Activity_Create(FirstTime As Boolean)
 	
 	Dim header_title As Label
 	header_title.Initialize("")
-	header_title.Text = extra.product_title
-	header_title.Gravity = Gravity.CENTER_VERTICAL
+
+	header_title.Gravity = Gravity.RIGHT
 	header_title.Typeface = Typeface.LoadFromAssets("yekan.ttf")
 	header_title.TextColor = Colors.red
 	header_title.TextSize = 11dip
 	header_title.Visible = False
-	product_header.AddView(header_title,10%x,5dip,85%x,45dip)
+	product_header.AddView(header_title,0,5dip,95%x,45dip)
 
 	product_ScrollView.Panel.AddView(saler,0,50%x+350dip,100%x-35dip,80dip)
 	product_ScrollView.Panel.AddView(pic_sheare,30dip,50%x+70dip,18dip,18dip)
@@ -286,24 +286,24 @@ Sub Activity_KeyPress(KeyCode As Int) As Boolean
 	End Select
 End Sub
 Sub product_ScrollView_ScrollChanged(Position As Int)
-	'Log(Position)
 	If Position <= 511 Then 
 		product_header.Color = Colors.ARGB(Position/2,255, 204, 255)
 	End If
 	If Position = 0 Then product_header.Color = Colors.rgb(255, 255, 255)
-	'Log(  Position)
+	
 	If (Position+83dip) > lbl_title.Top Then
 		If extra.product_title_flag = False Then extra.product_title_top = Position
-'		header_title.Visible = True
+		'header_title.Visible = True
 		
-		tempint =  40dip    -    (  Position - extra.product_title_top   )
-		
-		If tempint>= 12 Then
+		tempint =  75dip    -    (  Position - extra.product_title_top   )		
+		If tempint>= 10dip Then
+			Log(tempint)
 			header_title.Top = tempint
 			header_title.Visible = True
 			Else
 			product_header.Color = Colors.ARGB(255,255, 204, 255)
-			header_title.Top = 5dip
+			header_title.Top = 10dip
+			Log("end i")
 		End If
 		extra.product_title_flag = True
 	Else
@@ -352,6 +352,8 @@ Sub jobdone(job As HttpJob)
 					Dim model As String = colroot.Get("model")
 					lbl_title.Text = name
 					lbl_titlen.Text =  model
+					header_title.Text = name
+					extra.product_title = name
 					total.Text = price.SubString2(0,price.IndexOf("."))   & " " & "تومان"
 				Next
 			End If
