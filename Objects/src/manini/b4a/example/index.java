@@ -331,6 +331,8 @@ public manini.b4a.example.main _main = null;
 public manini.b4a.example.starter _starter = null;
 public manini.b4a.example.extra _extra = null;
 public manini.b4a.example.product _product = null;
+public manini.b4a.example.property _property = null;
+public manini.b4a.example.omid _omid = null;
 
 public static void initializeProcessGlobals() {
              try {
@@ -403,11 +405,13 @@ anywheresoftware.b4a.objects.ImageViewWrapper _imgdre = null;
 _imgdre = new anywheresoftware.b4a.objects.ImageViewWrapper();
  //BA.debugLineNum = 317;BA.debugLine="imgdre = Sender";
 _imgdre.setObject((android.widget.ImageView)(anywheresoftware.b4a.keywords.Common.Sender(mostCurrent.activityBA)));
- //BA.debugLineNum = 318;BA.debugLine="extra.product_id_toshow = imgdre.Tag";
+ //BA.debugLineNum = 318;BA.debugLine="Log(imgdre.Tag)";
+anywheresoftware.b4a.keywords.Common.Log(BA.ObjectToString(_imgdre.getTag()));
+ //BA.debugLineNum = 319;BA.debugLine="extra.product_id_toshow = imgdre.Tag";
 mostCurrent._extra._product_id_toshow = (int)(BA.ObjectToNumber(_imgdre.getTag()));
- //BA.debugLineNum = 319;BA.debugLine="StartActivity(product)";
+ //BA.debugLineNum = 320;BA.debugLine="StartActivity(product)";
 anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._product.getObject()));
- //BA.debugLineNum = 320;BA.debugLine="End Sub";
+ //BA.debugLineNum = 322;BA.debugLine="End Sub";
 return "";
 }
 public static String  _index_draw(String _size,String _flag,String _id,String _img,String _model) throws Exception{

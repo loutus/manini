@@ -130,6 +130,8 @@ public manini.b4a.example.main _main = null;
 public manini.b4a.example.extra _extra = null;
 public manini.b4a.example.index _index = null;
 public manini.b4a.example.product _product = null;
+public manini.b4a.example.property _property = null;
+public manini.b4a.example.omid _omid = null;
 public static boolean  _application_error(anywheresoftware.b4a.objects.B4AException _error,String _stacktrace) throws Exception{
  //BA.debugLineNum = 27;BA.debugLine="Sub Application_Error (Error As Exception, StackTr";
  //BA.debugLineNum = 28;BA.debugLine="Return True";

@@ -320,8 +320,10 @@ End Sub
 Sub imgdrew_click()
 	Dim imgdre As ImageView
 	imgdre = Sender
+	Log(imgdre.Tag)
 	extra.product_id_toshow = imgdre.Tag
 	StartActivity(product)
+	'Activity_Create(True)
 End Sub
 
  
