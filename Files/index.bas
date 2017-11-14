@@ -24,27 +24,16 @@ Sub Globals
 	Dim scrollview_lastproduct As HorizontalScrollView
 	Dim category_hscrollview As HorizontalScrollView
 	Dim lastproduct_ImageView(5000) As ImageView
-	Dim headerproc(5000)  As Panel
-	Dim headerproctxt(5000)  As Label
-	Dim procimage(5000) As ImageView
+	
 	Dim property_pnl As ScrollView
 End Sub
 Sub activity_KeyPress (KeyCode As Int) As Boolean 'Return True to consume the event
 	
 	If KeyCode= KeyCodes.KEYCODE_BACK Then
-		If extra.propertyjson = 1 Then 
-			property_pnl.RemoveView
-			property_pnl.Visible = False
-			extra.propertyjson = 0
-			Return True
-		Else If extra.flag_procpnl = 0 Then 
-				extra.procimg_flag = 0
+		Log(extra.flag_procpnl)
+		If extra.flag_procpnl = 0 Then 
 				Return False
 			Else
-			 
-			extra.procimg_flag =extra.procimg_flag -  extra.procimg_count(extra.flag_procpnl-1) 'dispose imge location
-
-			headerproc(extra.flag_procpnl-1).Visible = False
 			product_ScrollView(extra.flag_procpnl-1).RemoveView
 			product_ScrollView(extra.flag_procpnl-1).Visible = False
 			extra.flag_procpnl = extra.flag_procpnl - 1
@@ -185,63 +174,10 @@ If job.Success = True Then
 				Catch
 					'Log(LastException)
 				End Try
-				
-				If job.JobName.SubString2(0,7) = "picproc" Then
-					Log(job.GetString)
-					
-					Dim pan(20) As Panel
-					Dim flagerpic,flagpanel As Int
-					flagpanel = 0
-					flagerpic =  job.JobName.SubString(7)
-					
-					Dim Container As AHPageContainer
-					Dim Pager As AHViewPager
-					Container.Initialize
-					
-					Try
-						
-				
-					Dim parser As JSONParser
-					parser.Initialize( job.GetString)
-					Dim root As List = parser.NextArray
-					For Each colroot As Map In root
-						Dim image As String = colroot.Get("image")
-							image = extra.image_address & image.Replace(".jpg","-600x600.jpg")
-							Dim filename  As String = image.SubString(image.LastIndexOf("/")+1)
-							pan(flagpanel).Initialize("")
-							
-							procimage(extra.procimg_flag).Initialize("")
-						If File.Exists(File.DirInternalCache,filename)= True Then 
-							
-								procimage(extra.procimg_flag).Bitmap = LoadBitmap(File.DirInternalCache,filename)
-							Else
-								extra.main_download_product(extra.procimg_flag,image)
-								procimage(extra.procimg_flag).Bitmap = LoadBitmap(File.DirAssets,"main_defult_product.jpg")
-						End If
-							procimage(extra.procimg_flag).Gravity = Gravity.FILL
-							pan(flagpanel).AddView(procimage(extra.procimg_flag),25%x,0,50%x,50%x)
-							Container.AddPageAt(pan(flagpanel), "Main", 0)
-							flagpanel = flagpanel + 1
-							extra.procimg_flag = extra.procimg_flag + 1
-					Next
-					
-						Log("indexer " & extra.procimg_flag )
-						extra.procimg_count(extra.flag_procpnl) = flagpanel
-					
-					Pager.Initialize2(Container, "Pager")
-					product_ScrollView(flagerpic).Panel.AddView(Pager,0,55dip,100%x,50%x)
-					Catch
-						Log(LastException)
-					End Try
-				End If
-				Try
-					
-				Catch
-					Log(LastException)
-				End Try
 				Try
 					If job.JobName.SubString2(0,8) = "textproc" Then
-						Dim flager As Int
+						Log("eeeeeee")
+						Dim flager As String
 						flager =  job.JobName.SubString(8)
 						Dim s As String
 						s = job.GetString.Replace("&lt;","").Replace("p&gt;","").Replace("br&gt;","").Replace("/&lt;","").Replace("/p&gt;","").Replace("/br&gt;","").Replace("p style=&quot;text-align: justify; &quot;&gt;","")
@@ -263,51 +199,13 @@ If job.Success = True Then
 						
 					End If
 				Catch
-					Log("erro textproc job")
-				End Try
-				
-				Try
-					If job.JobName.SubString2(0,18)="downloadimgproduct" Then
-					
-						Dim index As Int
-						Dim name As String
-						index = job.JobName.SubString2(job.JobName.IndexOf("*")+1,job.JobName.LastIndexOf("*"))
-						name = job.JobName.SubString(job.JobName.LastIndexOf("/")+1)
-						Log(index)
-						Log(name)
-						Dim OutStream As OutputStream
-						OutStream = File.OpenOutput(File.DirInternalCache, name, False)
-						File.Copy2(job.GetInputStream,OutStream)
-						OutStream.Close
-						procimage(index).Bitmap = LoadBitmap(File.DirInternalCache, name)
-					End If
-				Catch
-					Log("error downloadimgproduct-- job")
-				End Try
-				
-				Try
-					If job.JobName.SubString2(0,19)="downloadimglastproc" Then
-						Dim index As Int
-						Dim name As String
-						index = job.JobName.SubString2(job.JobName.IndexOf("*")+1,job.JobName.LastIndexOf("*"))
-						name = job.JobName.SubString(job.JobName.LastIndexOf("/")+1)
-						Log(index)
-						Log(name)
-						Dim OutStream As OutputStream
-						OutStream = File.OpenOutput(File.DirInternalCache, name, False)
-						File.Copy2(job.GetInputStream,OutStream)
-						OutStream.Close
-						lastproduct_ImageView(index).Bitmap = LoadBitmap(File.DirInternalCache, name)
-					End If
-				Catch
-					Log("error downloadimglastproc job")
+					Log(LastException)
 				End Try
 				Try
-					
 					If job.JobName.SubString2(0,8)="nameproc" Then
 					
 					
-							Dim flager As Int
+							Dim flager As String
 						flager =  job.JobName.SubString(8)
 
 						Dim d1 As String
@@ -320,9 +218,9 @@ If job.Success = True Then
 						propert.Gravity = Gravity.CENTER
 						propert.Typeface = Typeface.LoadFromAssets("yekan.ttf")
 						propert.Text = "مشخصات"
-						propert.Tag = job.GetString.SubString2(job.GetString.IndexOf("^")+1,job.GetString.Length) & "#" & flager
+						propert.Tag = job.GetString.SubString2(job.GetString.IndexOf("^")+1,job.GetString.Length) & "#" & flag
 						product_ScrollView(flager).Panel.AddView(propert,15dip,50%x+164dip,100%x-30dip,40dip)
-					 
+						extra.propertyjson = 1
 					
 						Dim s As String
 						Dim parser As JSONParser
@@ -363,7 +261,7 @@ If job.Success = True Then
 						product_ScrollView(flager).Panel.AddView(lbl_title,0,50%x+85dip,95%x,30dip)
 						lbl_title.Text = name
 						
-						headerproctxt(flager).Text =name
+						
 						Dim total As Label
 						total.Initialize("")
 						total.TextColor = Colors.rgb(102, 187, 106)
@@ -371,25 +269,15 @@ If job.Success = True Then
 						total.Typeface = Typeface.LoadFromAssets("yekan.ttf")
 						total.Text = price.SubString2(0,price.LastIndexOf(".")) &  " " & "تومان"
 						total.TextSize = 13dip
-						product_ScrollView(flager).Panel.AddView(total,32dip,50%x+178dip + 48dip,60%x,40dip)	
-'						
-'						
-'						Dim pic_sheare As ImageView
-'						pic_sheare.Initialize("sharepost")
-'						pic_sheare.Gravity = Gravity.FILL
-'						pic_sheare.Tag = 
-'						pic_sheare.Bitmap = LoadBitmap(File.DirAssets,"sharing-interface.png")
-'						
-						
-						
+						product_ScrollView(flager).Panel.AddView(total,32dip,50%x+178dip + 48dip,60%x,40dip)						
 					End If
 				Catch
-					Log("erro nameproc job")
+					Log(LastException)
 				End Try
 				
 				Try
 					If job.JobName.SubString2(0,12) ="loadcategory" Then
-						Dim flager As Int
+						Dim flager As String
 						flager =  job.JobName.SubString(12)
 						
 						category_hscrollview.Initialize(100%x,"")
@@ -424,7 +312,9 @@ If job.Success = True Then
 							category_hscrollview.ScrollPosition = 50dip
 					End If
 					If job.JobName.SubString2(0,11) ="lastproduct" Then
-						Dim flager As Int
+						Log("last prodouct")
+						Log(job.GetString)
+						Dim flager As String
 						flager =  job.JobName.SubString(11)
 						
 						scrollview_lastproduct.Initialize(100%x,"")
@@ -469,26 +359,18 @@ If job.Success = True Then
 							lable2.TextSize = "16"
 							lable2.Text = price
 							scrollview_lastproduct.Panel.AddView(lable2,left+15dip,195dip,125dip,24dip)
-							image= image.Replace(".jpg","-600x600.jpg").Replace("/catalog/categoty/","/cache/catalog/categoty/")
+							
 							lastproduct_ImageView(indexf).Initialize("lastproduct_ImageView")
 							lastproduct_ImageView(indexf).Tag = id
-							Dim filename As String=image.SubString2(image.LastIndexOf("/")+1,image.Length)
-							
-							If File.Exists(File.DirInternalCache, filename)=True Then
-								Try
-									lastproduct_ImageView(indexf).Bitmap = LoadBitmap(File.DirInternalCache, filename)
-								Catch
-									Log("erro 	lastproduct_ImageView(indexf).")
-								End Try
-								
+							If File.Exists(File.DirInternalCache, image.SubString2(image.LastIndexOf("/")+1,image.Length)) Then
+								lastproduct_ImageView(indexf).Bitmap = LoadBitmap(File.DirInternalCache, image.SubString2(image.LastIndexOf("/")+1,image.Length))
 							Else
 								lastproduct_ImageView(indexf).Bitmap = LoadBitmap(File.DirAssets,"fileset/main_defult_product.jpg")
 								extra.main_download_lastproduct(indexf,image)
 							End If
-							
 							lastproduct_ImageView(indexf).Gravity = Gravity.FILL
 							scrollview_lastproduct.Panel.AddView(lastproduct_ImageView(indexf),left+1dip,1dip,157dip-2dip,157dip-2dip)
-'				
+				
 							Dim CanvasGraph As Canvas
 							CanvasGraph.Initialize(panel)
 							'CanvasGraph.DrawColor(Colors.White)
@@ -505,7 +387,7 @@ If job.Success = True Then
 						
 					End If
 		Catch
-					Log("eroro lastproduct job")
+			Log(LastException)
 		End Try
 			
 		End Select		
@@ -681,7 +563,7 @@ Sub imgdrew_click()
 	Log(imgdre.Tag)
 	extra.product_id_toshow = imgdre.Tag
 	
-	product_ScrollView(extra.flag_procpnl).Initialize2(500,"product_ScrollView")
+	product_ScrollView(extra.flag_procpnl).Initialize(500)
 	product_ScrollView(extra.flag_procpnl).Color = Colors.rgb(250, 250, 250)
 	Activity.AddView(product_ScrollView(extra.flag_procpnl),0,0,100%x,100%y)
 	loadroc(extra.flag_procpnl)
@@ -690,25 +572,6 @@ Sub imgdrew_click()
 End Sub
 
 Sub loadroc(flag As Int)
-	
-	
-	headerproc(flag).Initialize("")
-	headerproc(flag).Color = Colors.rgb(26, 188, 156)
-	Activity.AddView(headerproc(flag),0,0,100%x,55dip)
-	
-	
-	
-	
-	headerproctxt(flag).Initialize("")
-	headerproctxt(flag).Gravity = Bit.Or(Gravity.CENTER_VERTICAL,Gravity.RIGHT)
-	headerproctxt(flag).Typeface = Typeface.LoadFromAssets("yekan.ttf")
-	headerproctxt(flag).TextSize = 8dip
-	headerproctxt(flag).Text = "در حال بارگزاری"
-	headerproctxt(flag).TextColor = Colors.White
-	Activity.AddView(headerproctxt(flag),0,5dip,95%x,50dip)
-	
-	
-	
 	Dim download As HttpJob
 	download.Initialize("nameproc" & flag,Me)
 	download.PostString(extra.api,"op=product&id=" & extra.product_id_toshow)
@@ -717,10 +580,6 @@ Sub loadroc(flag As Int)
 	Dim downloadtext As HttpJob
 	downloadtext.Initialize("textproc"  & flag ,Me)
 	downloadtext.PostString(extra.api,"op=productdescription&id=" & extra.product_id_toshow)
-	
-	Dim downloadpic As HttpJob
-	downloadpic.Initialize("picproc" & flag,Me)
-	downloadpic.PostString(extra.api,"op=productpics&id=" & extra.product_id_toshow)
 	
 	
 	Dim jober As HttpJob
@@ -820,10 +679,10 @@ Sub loadroc(flag As Int)
 	properticon.Text = FA.GetFontAwesomeIconByName("fa-calendar-o")
 	product_ScrollView(flag).Panel.AddView(properticon,50%x+10dip+20dip,50%x+164dip,100%x-30dip,35dip)
 	
+
 	Dim pic_sheare As ImageView
-	pic_sheare.Initialize("sharepost")
+	pic_sheare.Initialize("")
 	pic_sheare.Gravity = Gravity.FILL
-	pic_sheare.Tag = extra.product_id_toshow
 	pic_sheare.Bitmap = LoadBitmap(File.DirAssets,"sharing-interface.png")
 	
 	Dim pic_like As ImageView
@@ -832,6 +691,7 @@ Sub loadroc(flag As Int)
 	pic_like.Bitmap = LoadBitmap(File.DirAssets,"like.png")
 	
 	
+		
 	Dim color As Label
 	color.Initialize("")
 	color.TextColor = Colors.rgb(140, 140, 140)
@@ -892,19 +752,15 @@ End Sub
 
 Sub propert_click()
 	Dim propert As Label
-	Dim temp As String
-	extra.propertyjson = 1
 	propert = Sender
-	temp = propert.Tag
-	temp =   temp.SubString2(0,  temp.LastIndexOf("#"))
-	Log(temp)
+	Log(propert.Tag)
 	property_pnl.Initialize(100%y)
-	property_pnl.Color = Colors.rgb(250, 250, 250)
+	property_pnl.Color = Colors.Green
 	Activity.AddView(property_pnl,0,0,100%x,100%y)
 	Dim topset As Int = 5dip
 	Try
 		Dim parser As JSONParser
-		parser.Initialize(temp)
+		parser.Initialize(extra.propertyjson)
 		Dim root As List = parser.NextArray
 		For Each colroot As Map In root
 			Dim name As String = colroot.Get("name")
@@ -940,7 +796,7 @@ Sub propert_click()
 			lblnodata.TextSize = 10dip
 			lblnodata.Typeface = Typeface.LoadFromAssets("yekan.ttf")
 			property_pnl.Panel.AddView(lblnodata,70%x,topset+30dip,30%x-5dip,30dip)
-
+				
 			topset = topset + 65dip
 				
 			property_pnl.Panel.Height = topset
@@ -948,6 +804,7 @@ Sub propert_click()
 	Catch
 		createnon
 	End Try
+
 End Sub
 Sub createnon()
 	Dim lblnodata As Label
@@ -959,11 +816,3 @@ Sub createnon()
 	lblnodata.Typeface = Typeface.LoadFromAssets("yekan.ttf")
 	property_pnl.Panel.AddView(lblnodata,0,0,100%x,50%x)
 End Sub
-
-
-Sub sharepost_click()
-	Dim pic_sheare As ImageView
-	pic_sheare = Sender
-	extra.programsharepost(pic_sheare.tag)
-End Sub
-

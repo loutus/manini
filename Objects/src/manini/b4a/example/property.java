@@ -32,7 +32,7 @@ public class property extends Activity implements B4AActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (isFirst) {
-			processBA = new BA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.property");
+			processBA = new anywheresoftware.b4a.ShellBA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.property");
 			processBA.loadHtSubs(this.getClass());
 	        float deviceScale = getApplicationContext().getResources().getDisplayMetrics().density;
 	        BALayout.setDeviceScale(deviceScale);
@@ -320,6 +320,15 @@ public class property extends Activity implements B4AActivity{
             
     }
 
+
+
+public static void initializeProcessGlobals() {
+             try {
+                Class.forName(BA.applicationContext.getPackageName() + ".main").getMethod("initializeProcessGlobals").invoke(null, null);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+}
 public anywheresoftware.b4a.keywords.Common __c = null;
 public anywheresoftware.b4a.objects.ScrollViewWrapper _scrollview1 = null;
 public static int _topset = 0;
@@ -330,15 +339,10 @@ public manini.b4a.example.extra _extra = null;
 public manini.b4a.example.index _index = null;
 public manini.b4a.example.product _product = null;
 public manini.b4a.example.omid _omid = null;
-
-public static void initializeProcessGlobals() {
-             try {
-                Class.forName(BA.applicationContext.getPackageName() + ".main").getMethod("initializeProcessGlobals").invoke(null, null);
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-}
 public static String  _activity_create(boolean _firsttime) throws Exception{
+RDebugUtils.currentModule="property";
+if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_create"))
+	return (String) Debug.delegate(mostCurrent.activityBA, "activity_create", new Object[] {_firsttime});
 anywheresoftware.b4a.objects.collections.JSONParser _parser = null;
 anywheresoftware.b4a.objects.collections.List _root = null;
 anywheresoftware.b4a.objects.collections.Map _colroot = null;
@@ -346,154 +350,195 @@ String _name = "";
 String _text = "";
 String _grouping = "";
 anywheresoftware.b4a.objects.LabelWrapper _lblnodata = null;
- //BA.debugLineNum = 20;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 22;BA.debugLine="Activity.LoadLayout(\"property\")";
+RDebugUtils.currentLine=3145728;
+ //BA.debugLineNum = 3145728;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+RDebugUtils.currentLine=3145730;
+ //BA.debugLineNum = 3145730;BA.debugLine="Activity.LoadLayout(\"property\")";
 mostCurrent._activity.LoadLayout("property",mostCurrent.activityBA);
- //BA.debugLineNum = 23;BA.debugLine="topset = 5dip";
+RDebugUtils.currentLine=3145731;
+ //BA.debugLineNum = 3145731;BA.debugLine="topset = 5dip";
 _topset = anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5));
- //BA.debugLineNum = 24;BA.debugLine="Log(extra.propertyjson.Trim.Length)";
-anywheresoftware.b4a.keywords.Common.Log(BA.NumberToString(mostCurrent._extra._propertyjson.trim().length()));
- //BA.debugLineNum = 25;BA.debugLine="If extra.propertyjson.Trim.Length < 8 Then";
-if (mostCurrent._extra._propertyjson.trim().length()<8) { 
- //BA.debugLineNum = 26;BA.debugLine="createnon";
-_createnon();
- }else {
- //BA.debugLineNum = 28;BA.debugLine="Try";
-try { //BA.debugLineNum = 29;BA.debugLine="Dim parser As JSONParser";
+RDebugUtils.currentLine=3145736;
+ //BA.debugLineNum = 3145736;BA.debugLine="Try";
+try {RDebugUtils.currentLine=3145737;
+ //BA.debugLineNum = 3145737;BA.debugLine="Dim parser As JSONParser";
 _parser = new anywheresoftware.b4a.objects.collections.JSONParser();
- //BA.debugLineNum = 30;BA.debugLine="parser.Initialize(extra.propertyjson)";
-_parser.Initialize(mostCurrent._extra._propertyjson);
- //BA.debugLineNum = 31;BA.debugLine="Dim root As List = parser.NextArray";
+RDebugUtils.currentLine=3145738;
+ //BA.debugLineNum = 3145738;BA.debugLine="parser.Initialize(extra.propertyjson)";
+_parser.Initialize(BA.NumberToString(mostCurrent._extra._propertyjson));
+RDebugUtils.currentLine=3145739;
+ //BA.debugLineNum = 3145739;BA.debugLine="Dim root As List = parser.NextArray";
 _root = new anywheresoftware.b4a.objects.collections.List();
 _root = _parser.NextArray();
- //BA.debugLineNum = 32;BA.debugLine="For Each colroot As Map In root";
+RDebugUtils.currentLine=3145740;
+ //BA.debugLineNum = 3145740;BA.debugLine="For Each colroot As Map In root";
 _colroot = new anywheresoftware.b4a.objects.collections.Map();
 {
-final anywheresoftware.b4a.BA.IterableList group11 = _root;
-final int groupLen11 = group11.getSize()
-;int index11 = 0;
+final anywheresoftware.b4a.BA.IterableList group7 = _root;
+final int groupLen7 = group7.getSize()
+;int index7 = 0;
 ;
-for (; index11 < groupLen11;index11++){
-_colroot.setObject((anywheresoftware.b4a.objects.collections.Map.MyMap)(group11.Get(index11)));
- //BA.debugLineNum = 33;BA.debugLine="Dim name As String = colroot.Get(\"name\")";
+for (; index7 < groupLen7;index7++){
+_colroot.setObject((anywheresoftware.b4a.objects.collections.Map.MyMap)(group7.Get(index7)));
+RDebugUtils.currentLine=3145741;
+ //BA.debugLineNum = 3145741;BA.debugLine="Dim name As String = colroot.Get(\"name\")";
 _name = BA.ObjectToString(_colroot.Get((Object)("name")));
- //BA.debugLineNum = 34;BA.debugLine="Dim text As String = colroot.Get(\"text\")";
+RDebugUtils.currentLine=3145742;
+ //BA.debugLineNum = 3145742;BA.debugLine="Dim text As String = colroot.Get(\"text\")";
 _text = BA.ObjectToString(_colroot.Get((Object)("text")));
- //BA.debugLineNum = 35;BA.debugLine="Dim grouping As String = colroot.Get(\"grouping";
+RDebugUtils.currentLine=3145743;
+ //BA.debugLineNum = 3145743;BA.debugLine="Dim grouping As String = colroot.Get(\"grouping";
 _grouping = BA.ObjectToString(_colroot.Get((Object)("grouping")));
- //BA.debugLineNum = 37;BA.debugLine="Dim lblnodata As Label";
+RDebugUtils.currentLine=3145745;
+ //BA.debugLineNum = 3145745;BA.debugLine="Dim lblnodata As Label";
 _lblnodata = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 38;BA.debugLine="lblnodata.Initialize(\"\")";
+RDebugUtils.currentLine=3145746;
+ //BA.debugLineNum = 3145746;BA.debugLine="lblnodata.Initialize(\"\")";
 _lblnodata.Initialize(mostCurrent.activityBA,"");
- //BA.debugLineNum = 39;BA.debugLine="lblnodata.Text =grouping";
+RDebugUtils.currentLine=3145747;
+ //BA.debugLineNum = 3145747;BA.debugLine="lblnodata.Text =grouping";
 _lblnodata.setText(BA.ObjectToCharSequence(_grouping));
- //BA.debugLineNum = 40;BA.debugLine="lblnodata.Gravity = Gravity.CENTER";
+RDebugUtils.currentLine=3145748;
+ //BA.debugLineNum = 3145748;BA.debugLine="lblnodata.Gravity = Gravity.CENTER";
 _lblnodata.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.CENTER);
- //BA.debugLineNum = 41;BA.debugLine="lblnodata.TextColor = Colors.rgb(38, 38, 38)";
+RDebugUtils.currentLine=3145749;
+ //BA.debugLineNum = 3145749;BA.debugLine="lblnodata.TextColor = Colors.rgb(38, 38, 38)";
 _lblnodata.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (38),(int) (38),(int) (38)));
- //BA.debugLineNum = 42;BA.debugLine="lblnodata.color = Colors.rgb(217, 217, 217)";
+RDebugUtils.currentLine=3145750;
+ //BA.debugLineNum = 3145750;BA.debugLine="lblnodata.color = Colors.rgb(217, 217, 217)";
 _lblnodata.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (217),(int) (217),(int) (217)));
- //BA.debugLineNum = 43;BA.debugLine="lblnodata.TextSize = 11dip";
+RDebugUtils.currentLine=3145751;
+ //BA.debugLineNum = 3145751;BA.debugLine="lblnodata.TextSize = 11dip";
 _lblnodata.setTextSize((float) (anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (11))));
- //BA.debugLineNum = 44;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"";
+RDebugUtils.currentLine=3145752;
+ //BA.debugLineNum = 3145752;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"";
 _lblnodata.setTypeface(anywheresoftware.b4a.keywords.Common.Typeface.LoadFromAssets("yekan.ttf"));
- //BA.debugLineNum = 45;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,5dip,topse";
+RDebugUtils.currentLine=3145753;
+ //BA.debugLineNum = 3145753;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,5dip,topse";
 mostCurrent._scrollview1.getPanel().AddView((android.view.View)(_lblnodata.getObject()),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5)),_topset,(int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (100),mostCurrent.activityBA)-anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (10))),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (35)));
- //BA.debugLineNum = 47;BA.debugLine="Dim lblnodata As Label";
+RDebugUtils.currentLine=3145755;
+ //BA.debugLineNum = 3145755;BA.debugLine="Dim lblnodata As Label";
 _lblnodata = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 48;BA.debugLine="lblnodata.Initialize(\"\")";
+RDebugUtils.currentLine=3145756;
+ //BA.debugLineNum = 3145756;BA.debugLine="lblnodata.Initialize(\"\")";
 _lblnodata.Initialize(mostCurrent.activityBA,"");
- //BA.debugLineNum = 49;BA.debugLine="lblnodata.Text =\"  \" & text";
+RDebugUtils.currentLine=3145757;
+ //BA.debugLineNum = 3145757;BA.debugLine="lblnodata.Text =\"  \" & text";
 _lblnodata.setText(BA.ObjectToCharSequence("  "+_text));
- //BA.debugLineNum = 50;BA.debugLine="lblnodata.Gravity = Gravity.RIGHT";
+RDebugUtils.currentLine=3145758;
+ //BA.debugLineNum = 3145758;BA.debugLine="lblnodata.Gravity = Gravity.RIGHT";
 _lblnodata.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.RIGHT);
- //BA.debugLineNum = 51;BA.debugLine="lblnodata.TextColor = Colors.rgb(115, 115, 115";
+RDebugUtils.currentLine=3145759;
+ //BA.debugLineNum = 3145759;BA.debugLine="lblnodata.TextColor = Colors.rgb(115, 115, 115";
 _lblnodata.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (115),(int) (115),(int) (115)));
- //BA.debugLineNum = 52;BA.debugLine="lblnodata.color = Colors.rgb(242, 242, 242)";
+RDebugUtils.currentLine=3145760;
+ //BA.debugLineNum = 3145760;BA.debugLine="lblnodata.color = Colors.rgb(242, 242, 242)";
 _lblnodata.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (242),(int) (242),(int) (242)));
- //BA.debugLineNum = 53;BA.debugLine="lblnodata.TextSize = 9dip";
+RDebugUtils.currentLine=3145761;
+ //BA.debugLineNum = 3145761;BA.debugLine="lblnodata.TextSize = 9dip";
 _lblnodata.setTextSize((float) (anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (9))));
- //BA.debugLineNum = 54;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"";
+RDebugUtils.currentLine=3145762;
+ //BA.debugLineNum = 3145762;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"";
 _lblnodata.setTypeface(anywheresoftware.b4a.keywords.Common.Typeface.LoadFromAssets("yekan.ttf"));
- //BA.debugLineNum = 55;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,5dip,topse";
+RDebugUtils.currentLine=3145763;
+ //BA.debugLineNum = 3145763;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,5dip,topse";
 mostCurrent._scrollview1.getPanel().AddView((android.view.View)(_lblnodata.getObject()),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5)),(int) (_topset+anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (30))),(int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (70),mostCurrent.activityBA)-anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5))),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (30)));
- //BA.debugLineNum = 57;BA.debugLine="Dim lblnodata As Label";
+RDebugUtils.currentLine=3145765;
+ //BA.debugLineNum = 3145765;BA.debugLine="Dim lblnodata As Label";
 _lblnodata = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 58;BA.debugLine="lblnodata.Initialize(\"\")";
+RDebugUtils.currentLine=3145766;
+ //BA.debugLineNum = 3145766;BA.debugLine="lblnodata.Initialize(\"\")";
 _lblnodata.Initialize(mostCurrent.activityBA,"");
- //BA.debugLineNum = 59;BA.debugLine="lblnodata.Text =\"  \" & name";
+RDebugUtils.currentLine=3145767;
+ //BA.debugLineNum = 3145767;BA.debugLine="lblnodata.Text =\"  \" & name";
 _lblnodata.setText(BA.ObjectToCharSequence("  "+_name));
- //BA.debugLineNum = 60;BA.debugLine="lblnodata.Gravity = Gravity.RIGHT";
+RDebugUtils.currentLine=3145768;
+ //BA.debugLineNum = 3145768;BA.debugLine="lblnodata.Gravity = Gravity.RIGHT";
 _lblnodata.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.RIGHT);
- //BA.debugLineNum = 61;BA.debugLine="lblnodata.TextColor = Colors.rgb(115, 115, 115";
+RDebugUtils.currentLine=3145769;
+ //BA.debugLineNum = 3145769;BA.debugLine="lblnodata.TextColor = Colors.rgb(115, 115, 115";
 _lblnodata.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (115),(int) (115),(int) (115)));
- //BA.debugLineNum = 62;BA.debugLine="lblnodata.color = Colors.rgb(242, 242, 242)";
+RDebugUtils.currentLine=3145770;
+ //BA.debugLineNum = 3145770;BA.debugLine="lblnodata.color = Colors.rgb(242, 242, 242)";
 _lblnodata.setColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (242),(int) (242),(int) (242)));
- //BA.debugLineNum = 63;BA.debugLine="lblnodata.TextSize = 10dip";
+RDebugUtils.currentLine=3145771;
+ //BA.debugLineNum = 3145771;BA.debugLine="lblnodata.TextSize = 10dip";
 _lblnodata.setTextSize((float) (anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (10))));
- //BA.debugLineNum = 64;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"";
+RDebugUtils.currentLine=3145772;
+ //BA.debugLineNum = 3145772;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"";
 _lblnodata.setTypeface(anywheresoftware.b4a.keywords.Common.Typeface.LoadFromAssets("yekan.ttf"));
- //BA.debugLineNum = 65;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,70%x,topse";
+RDebugUtils.currentLine=3145773;
+ //BA.debugLineNum = 3145773;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,70%x,topse";
 mostCurrent._scrollview1.getPanel().AddView((android.view.View)(_lblnodata.getObject()),anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (70),mostCurrent.activityBA),(int) (_topset+anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (30))),(int) (anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (30),mostCurrent.activityBA)-anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (5))),anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (30)));
- //BA.debugLineNum = 67;BA.debugLine="topset = topset + 65dip";
+RDebugUtils.currentLine=3145775;
+ //BA.debugLineNum = 3145775;BA.debugLine="topset = topset + 65dip";
 _topset = (int) (_topset+anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (65)));
- //BA.debugLineNum = 69;BA.debugLine="ScrollView1.Panel.Height = topset";
+RDebugUtils.currentLine=3145777;
+ //BA.debugLineNum = 3145777;BA.debugLine="ScrollView1.Panel.Height = topset";
 mostCurrent._scrollview1.getPanel().setHeight(_topset);
  }
 };
  } 
-       catch (Exception e46) {
-			processBA.setLastException(e46); //BA.debugLineNum = 72;BA.debugLine="createnon";
+       catch (Exception e42) {
+			processBA.setLastException(e42);RDebugUtils.currentLine=3145780;
+ //BA.debugLineNum = 3145780;BA.debugLine="createnon";
 _createnon();
  };
- };
- //BA.debugLineNum = 79;BA.debugLine="End Sub";
-return "";
-}
-public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 95;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 97;BA.debugLine="End Sub";
-return "";
-}
-public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 91;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 93;BA.debugLine="End Sub";
+RDebugUtils.currentLine=3145783;
+ //BA.debugLineNum = 3145783;BA.debugLine="End Sub";
 return "";
 }
 public static String  _createnon() throws Exception{
+RDebugUtils.currentModule="property";
+if (Debug.shouldDelegate(mostCurrent.activityBA, "createnon"))
+	return (String) Debug.delegate(mostCurrent.activityBA, "createnon", null);
 anywheresoftware.b4a.objects.LabelWrapper _lblnodata = null;
- //BA.debugLineNum = 80;BA.debugLine="Sub createnon()";
- //BA.debugLineNum = 81;BA.debugLine="Dim lblnodata As Label";
+RDebugUtils.currentLine=3211264;
+ //BA.debugLineNum = 3211264;BA.debugLine="Sub createnon()";
+RDebugUtils.currentLine=3211265;
+ //BA.debugLineNum = 3211265;BA.debugLine="Dim lblnodata As Label";
 _lblnodata = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 82;BA.debugLine="lblnodata.Initialize(\"\")";
+RDebugUtils.currentLine=3211266;
+ //BA.debugLineNum = 3211266;BA.debugLine="lblnodata.Initialize(\"\")";
 _lblnodata.Initialize(mostCurrent.activityBA,"");
- //BA.debugLineNum = 83;BA.debugLine="lblnodata.Text =\"هیچ مشخصه ای وجود ندارد\"";
+RDebugUtils.currentLine=3211267;
+ //BA.debugLineNum = 3211267;BA.debugLine="lblnodata.Text =\"هیچ مشخصه ای وجود ندارد\"";
 _lblnodata.setText(BA.ObjectToCharSequence("هیچ مشخصه ای وجود ندارد"));
- //BA.debugLineNum = 84;BA.debugLine="lblnodata.Gravity = Gravity.CENTER";
+RDebugUtils.currentLine=3211268;
+ //BA.debugLineNum = 3211268;BA.debugLine="lblnodata.Gravity = Gravity.CENTER";
 _lblnodata.setGravity(anywheresoftware.b4a.keywords.Common.Gravity.CENTER);
- //BA.debugLineNum = 85;BA.debugLine="lblnodata.TextColor = Colors.rgb(179, 179, 179)";
+RDebugUtils.currentLine=3211269;
+ //BA.debugLineNum = 3211269;BA.debugLine="lblnodata.TextColor = Colors.rgb(179, 179, 179)";
 _lblnodata.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.RGB((int) (179),(int) (179),(int) (179)));
- //BA.debugLineNum = 86;BA.debugLine="lblnodata.TextSize = 12dip";
+RDebugUtils.currentLine=3211270;
+ //BA.debugLineNum = 3211270;BA.debugLine="lblnodata.TextSize = 12dip";
 _lblnodata.setTextSize((float) (anywheresoftware.b4a.keywords.Common.DipToCurrent((int) (12))));
- //BA.debugLineNum = 87;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"yek";
+RDebugUtils.currentLine=3211271;
+ //BA.debugLineNum = 3211271;BA.debugLine="lblnodata.Typeface = Typeface.LoadFromAssets(\"yek";
 _lblnodata.setTypeface(anywheresoftware.b4a.keywords.Common.Typeface.LoadFromAssets("yekan.ttf"));
- //BA.debugLineNum = 88;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,0,0,100%x,50%";
+RDebugUtils.currentLine=3211272;
+ //BA.debugLineNum = 3211272;BA.debugLine="ScrollView1.Panel.AddView(lblnodata,0,0,100%x,50%";
 mostCurrent._scrollview1.getPanel().AddView((android.view.View)(_lblnodata.getObject()),(int) (0),(int) (0),anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (100),mostCurrent.activityBA),anywheresoftware.b4a.keywords.Common.PerXToCurrent((float) (50),mostCurrent.activityBA));
- //BA.debugLineNum = 89;BA.debugLine="End Sub";
+RDebugUtils.currentLine=3211273;
+ //BA.debugLineNum = 3211273;BA.debugLine="End Sub";
 return "";
 }
-public static String  _globals() throws Exception{
- //BA.debugLineNum = 12;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 16;BA.debugLine="Private ScrollView1 As ScrollView";
-mostCurrent._scrollview1 = new anywheresoftware.b4a.objects.ScrollViewWrapper();
- //BA.debugLineNum = 17;BA.debugLine="Dim topset As Int";
-_topset = 0;
- //BA.debugLineNum = 18;BA.debugLine="End Sub";
+public static String  _activity_pause(boolean _userclosed) throws Exception{
+RDebugUtils.currentModule="property";
+RDebugUtils.currentLine=3342336;
+ //BA.debugLineNum = 3342336;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+RDebugUtils.currentLine=3342338;
+ //BA.debugLineNum = 3342338;BA.debugLine="End Sub";
 return "";
 }
-public static String  _process_globals() throws Exception{
- //BA.debugLineNum = 6;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 10;BA.debugLine="End Sub";
+public static String  _activity_resume() throws Exception{
+RDebugUtils.currentModule="property";
+if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_resume"))
+	return (String) Debug.delegate(mostCurrent.activityBA, "activity_resume", null);
+RDebugUtils.currentLine=3276800;
+ //BA.debugLineNum = 3276800;BA.debugLine="Sub Activity_Resume";
+RDebugUtils.currentLine=3276802;
+ //BA.debugLineNum = 3276802;BA.debugLine="End Sub";
 return "";
 }
 }

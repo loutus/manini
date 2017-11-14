@@ -73,6 +73,11 @@ Sub Activity_Create(FirstTime As Boolean)
 	Pager.Initialize2(Container, "Pager")
 	product_ScrollView.Panel.AddView(Pager,0,55dip,100%x,50%x+55dip)
 	
+	
+	'*********************
+	
+	
+	
 	Dim pnl As Panel
 	pnl.Initialize("")
 	pnl.Color = Colors.rgb(250, 250, 250)
@@ -97,9 +102,7 @@ Sub Activity_Create(FirstTime As Boolean)
 	extra.InitPanel(pnl4_moshakhasat,2,1,Colors.rgb(204, 204, 204))
 	
 	moretext_data = "در حال بارگذاری"
-	'moretext_data = moretext_data '& moretext_data '& moretext_data & moretext_data '& moretext_data
-	'moretext_data& moretext_data & moretext_data & moretext_data & moretext_data & moretext_data
-	'moretext_data = moretext_data & moretext_data & moretext_data & moretext_data & moretext_data & moretext_data& moretext_data & moretext_data & moretext_data & moretext_data & moretext_data
+
 	RTLJustify1.Initialize("")
 	RTLJustify1.Text = moretext_data
 	RTLJustify1.Typeface = Typeface.LoadFromAssets("yekan.ttf")
@@ -219,10 +222,10 @@ Sub Activity_Create(FirstTime As Boolean)
 	lbl_titlen.TextColor = Colors.rgb(169, 169, 169)
 	product_ScrollView.Panel.AddView(lbl_titlen,0,50%x+120dip,95%x,30dip)
 	
-	Dim pic_sheare As ImageView
-	pic_sheare.Initialize("")
-	pic_sheare.Gravity = Gravity.FILL
-	pic_sheare.Bitmap = LoadBitmap(File.DirAssets,"sharing-interface.png")
+'	Dim pic_sheare As ImageView
+'	pic_sheare.Initialize("")
+'	pic_sheare.Gravity = Gravity.FILL
+'	pic_sheare.Bitmap = LoadBitmap(File.DirAssets,"sharing-interface.png")
 	
 	Dim pic_like As ImageView
 	pic_like.Initialize("")
@@ -270,20 +273,20 @@ Sub Activity_Create(FirstTime As Boolean)
 	header_title.Visible = False
 	product_header.AddView(header_title,0,5dip,95%x,45dip)
 
-	product_ScrollView.Panel.AddView(saler,0,50%x+350dip,100%x-35dip,80dip)
-	product_ScrollView.Panel.AddView(pic_sheare,30dip,50%x+70dip,18dip,18dip)
-	product_ScrollView.Panel.AddView(pic_like,80dip,50%x+70dip,18dip,18dip)
-	product_header.BringToFront
-	product_ScrollView.Panel.Height = 2125
+'	product_ScrollView.Panel.AddView(saler,0,50%x+350dip,100%x-35dip,80dip)
+'	product_ScrollView.Panel.AddView(pic_sheare,30dip,50%x+70dip,18dip,18dip)
+'	product_ScrollView.Panel.AddView(pic_like,80dip,50%x+70dip,18dip,18dip)
+'	product_header.BringToFront
+'	product_ScrollView.Panel.Height = 2125
 	'.load_lastproduct_main
-	extra.load_category_main
+	'extra.load_category_main
 End Sub
 Sub Activity_KeyPress(KeyCode As Int) As Boolean
-	Log(product_ScrollView.ScrollPosition)
-	Select KeyCode
-		Case KeyCodes.KEYCODE_DPAD_UP
-			Log("DOWN")
-	End Select
+	'Log(product_ScrollView.ScrollPosition)
+	If KeyCode= KeyCodes.KEYCODE_BACK Then
+		Log("backed")
+		Return False
+	End If
 End Sub
 Sub product_ScrollView_ScrollChanged(Position As Int)
 	If Position <= 511 Then 
@@ -327,6 +330,18 @@ Sub jobdone(job As HttpJob)
 	Log(job.JobName)
 	If job.Success = True Then
 
+		If job.JobName = "picproc" Then
+			Log(job.GetString)
+'			parser.Initialize(job.GetString)
+'			Dim root As List = parser.NextArray
+'			For Each colroot As Map In root
+'				Dim image As String = colroot.Get("image")
+'				
+'			Next
+'			
+			
+			
+		End If
 			If job.JobName = "textproc" Then
 				Dim s As String
 				s = job.GetString.Replace("&lt;","").Replace("p&gt;","").Replace("br&gt;","").Replace("/&lt;","").Replace("/p&gt;","").Replace("/br&gt;","").Replace("p style=&quot;text-align: justify; &quot;&gt;","")
@@ -452,7 +467,7 @@ Sub jobdone(job As HttpJob)
 					ImageView(indexf).Bitmap = LoadBitmap(File.DirInternalCache, image.SubString2(image.LastIndexOf("/")+1,image.Length))
 				Else
 					ImageView(indexf).Bitmap = LoadBitmap(File.DirAssets,"fileset/main_defult_product.jpg")
-					extra.main_download_image(indexf,image)
+					'extra.main_download_image(indexf,image)
 				End If
 				ImageView(indexf).Gravity = Gravity.FILL
 				scrollview_lastproduct.Panel.AddView(ImageView(indexf),left+1dip,1dip,157dip-2dip,157dip-2dip)
@@ -489,8 +504,8 @@ Sub moretext_click()
 	Dim lener As Int
 	lener = RTLJustify1.Text.Length
 	Log(lener)
-	pnl4_moshakhasat.Height = lener * 0.1%x + 30dip
-	RTLJustify1.Height = lener * 0.1%x
+	pnl4_moshakhasat.Height = lener * 0.275%x + 30dip
+	RTLJustify1.Height = lener * 0.275%x
 	'moretext.Top = pnl4_moshakhasat.Top + pnl4_moshakhasat.Height   - 50dip
 	moretext.Visible = False
 	pnl4_line.Visible = False
@@ -503,3 +518,4 @@ End Sub
 Sub propert_click()
 	StartActivity(property)
 End Sub
+

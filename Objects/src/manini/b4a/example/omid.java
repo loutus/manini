@@ -32,7 +32,7 @@ public class omid extends Activity implements B4AActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (isFirst) {
-			processBA = new BA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.omid");
+			processBA = new anywheresoftware.b4a.ShellBA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.omid");
 			processBA.loadHtSubs(this.getClass());
 	        float deviceScale = getApplicationContext().getResources().getDisplayMetrics().density;
 	        BALayout.setDeviceScale(deviceScale);
@@ -320,14 +320,7 @@ public class omid extends Activity implements B4AActivity{
             
     }
 
-public anywheresoftware.b4a.keywords.Common __c = null;
-public anywheresoftware.b4a.samples.httputils2.httputils2service _httputils2service = null;
-public manini.b4a.example.main _main = null;
-public manini.b4a.example.starter _starter = null;
-public manini.b4a.example.extra _extra = null;
-public manini.b4a.example.index _index = null;
-public manini.b4a.example.product _product = null;
-public manini.b4a.example.property _property = null;
+
 
 public static void initializeProcessGlobals() {
              try {
@@ -336,31 +329,43 @@ public static void initializeProcessGlobals() {
                 throw new RuntimeException(e);
             }
 }
+public anywheresoftware.b4a.keywords.Common __c = null;
+public anywheresoftware.b4a.samples.httputils2.httputils2service _httputils2service = null;
+public manini.b4a.example.main _main = null;
+public manini.b4a.example.starter _starter = null;
+public manini.b4a.example.extra _extra = null;
+public manini.b4a.example.index _index = null;
+public manini.b4a.example.product _product = null;
+public manini.b4a.example.property _property = null;
 public static String  _activity_create(boolean _firsttime) throws Exception{
- //BA.debugLineNum = 18;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 20;BA.debugLine="Activity.LoadLayout(\"product\")";
+RDebugUtils.currentModule="omid";
+if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_create"))
+	return (String) Debug.delegate(mostCurrent.activityBA, "activity_create", new Object[] {_firsttime});
+RDebugUtils.currentLine=3735552;
+ //BA.debugLineNum = 3735552;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+RDebugUtils.currentLine=3735554;
+ //BA.debugLineNum = 3735554;BA.debugLine="Activity.LoadLayout(\"product\")";
 mostCurrent._activity.LoadLayout("product",mostCurrent.activityBA);
- //BA.debugLineNum = 22;BA.debugLine="End Sub";
+RDebugUtils.currentLine=3735556;
+ //BA.debugLineNum = 3735556;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 28;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 30;BA.debugLine="End Sub";
+RDebugUtils.currentModule="omid";
+RDebugUtils.currentLine=3866624;
+ //BA.debugLineNum = 3866624;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+RDebugUtils.currentLine=3866626;
+ //BA.debugLineNum = 3866626;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 24;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 26;BA.debugLine="End Sub";
-return "";
-}
-public static String  _globals() throws Exception{
- //BA.debugLineNum = 12;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 16;BA.debugLine="End Sub";
-return "";
-}
-public static String  _process_globals() throws Exception{
- //BA.debugLineNum = 6;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 10;BA.debugLine="End Sub";
+RDebugUtils.currentModule="omid";
+if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_resume"))
+	return (String) Debug.delegate(mostCurrent.activityBA, "activity_resume", null);
+RDebugUtils.currentLine=3801088;
+ //BA.debugLineNum = 3801088;BA.debugLine="Sub Activity_Resume";
+RDebugUtils.currentLine=3801090;
+ //BA.debugLineNum = 3801090;BA.debugLine="End Sub";
 return "";
 }
 }

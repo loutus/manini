@@ -21,15 +21,15 @@ Sub Globals
 	Private ScrollView1 As ScrollView
 	Dim topset As Int
 End Sub
-
+'
 Sub Activity_Create(FirstTime As Boolean)
-	'Do not forget to load the layout file created with the visual designer. For example:
+	'Do Not forget To load the layout File created with the visual designer. For example:
 	Activity.LoadLayout("property")
 	topset = 5dip
-	Log(extra.propertyjson.Trim.Length)
-	If extra.propertyjson.Trim.Length < 8 Then
-		createnon
-	Else
+'	Log(extra.propertyjson.Trim.Length)
+'	If extra.propertyjson.Trim.Length < 8 Then
+'		createnon
+'	Else
 		Try
 			Dim parser As JSONParser
 			parser.Initialize(extra.propertyjson)
@@ -76,12 +76,8 @@ Sub Activity_Create(FirstTime As Boolean)
 		Catch
 			createnon
 		End Try
-				
-End If
-	  
-	
-	
-End Sub
+'End If 
+	End Sub
 Sub createnon()
 	Dim lblnodata As Label
 	lblnodata.Initialize("")
