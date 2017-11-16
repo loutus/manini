@@ -12,6 +12,8 @@ Sub Process_Globals
 	'These variables can be accessed from all modules.
 End Sub
 Sub Globals
+	Dim navi As AHNavigationDrawer
+	Dim pCantent As Panel
 	'These global variables will be redeclared each time the activity is created.
 	'These variables can only be accessed from this module.
 	Private index_ScrollView As ScrollView
@@ -54,24 +56,41 @@ Sub activity_KeyPress (KeyCode As Int) As Boolean 'Return True to consume the ev
 	End If
 End Sub
 Sub Activity_Create(FirstTime As Boolean)
+	navi.Initialize2("navi",Activity,50%x,navi.GRAVITY_RIGHT)
+	navi.NavigationPanel.Color = Colors.ARGB(150,236,239,241)
+	
+	' در خط زیر لایوتی که مربوط به اسلاید منو است را لود کنید
+	navi.NavigationPanel.LoadLayout("menu")
+	navi.NavigationPanel.BringToFront
+	pCantent.Initialize("")
+	navi.ContentPanel.AddView(pCantent,0,0,100%x,100%y)
+
+	
+	' در خط زیر لایوت اصلی مربوط به این اکتیویتی را لود کنید
+	pCantent.LoadLayout("index")
+
+	pCantent.Color = Colors.RGB(234,234,234)
 	'Do not forget to load the layout file created with the visual designer.
-	Activity.LoadLayout("index")
-	extra.index_ob_olaviyat(0) = 1
+	'Activity.LoadLayout("index")
+	
+
 	'index_ScrollView.Panel.LoadLayout("indexdata")
  	If File.Exists(File.DirInternalCache & "/product","")=False Then 
 		File.MakeDir(File.DirInternalCache,"product"	)
 	End If
 
-	extra.load_index
+
 	Dim r As Reflector
 	r.Target = index_ScrollView
 	r.RunMethod2("setVerticalScrollBarEnabled", False, "java.lang.boolean")
 	r.RunMethod2("setOverScrollMode", 2, "java.lang.int" )
-	
-	
+	extra.load_index
+	extra.index_ob_olaviyat(0) = 1
 	extra.flag_procpnl = 0
 	extra.propertyjson = 0
+	
 End Sub
+
 Sub Activity_Resume
 End Sub
 Sub Activity_Pause (UserClosed As Boolean)
@@ -521,7 +540,8 @@ Sub index_draw(size As String,flag,id,img,model)
 	lbl.Initialize("lbl")
 	lbl.Text = model
 	lbl.TextColor = Colors.White
-	lbl.Color = Colors.ARGB(140, 140, 140,100)
+	lbl.Color = Colors.rgb(15, 112, 93)
+	lbl.Gravity = Gravity.FILL
 	Dim space As Int = 2dip
 	Dim padding_space As Int = 2dip
 	If size="larg" Then 
@@ -697,15 +717,13 @@ Sub loadroc(flag As Int)
 	Activity.AddView(headerproc(flag),0,0,100%x,55dip)
 	
 	
-	
-	
 	headerproctxt(flag).Initialize("")
 	headerproctxt(flag).Gravity = Bit.Or(Gravity.CENTER_VERTICAL,Gravity.RIGHT)
 	headerproctxt(flag).Typeface = Typeface.LoadFromAssets("yekan.ttf")
 	headerproctxt(flag).TextSize = 8dip
 	headerproctxt(flag).Text = "در حال بارگزاری"
 	headerproctxt(flag).TextColor = Colors.White
-	Activity.AddView(headerproctxt(flag),0,5dip,95%x,50dip)
+	headerproc(flag).AddView(headerproctxt(flag),0,5dip,95%x,50dip)
 	
 	
 	
@@ -882,7 +900,7 @@ Sub lastproduct_ImageView_click()
 	Dim img As ImageView
 	img = Sender
 	extra.product_id_toshow = img.Tag
-	
+
 	product_ScrollView(extra.flag_procpnl).Initialize(500)
 	product_ScrollView(extra.flag_procpnl).Color = Colors.rgb(250, 250, 250)
 	Activity.AddView(product_ScrollView(extra.flag_procpnl),0,0,100%x,100%y)
@@ -967,3 +985,39 @@ Sub sharepost_click()
 	extra.programsharepost(pic_sheare.tag)
 End Sub
 
+
+
+Sub menubtn_Click
+	navi.OpenDrawer2(navi.GRAVITY_RIGHT)
+End Sub
+
+Sub menuporfrosh_Click
+	
+End Sub
+
+Sub menutakhfif_Click
+	
+End Sub
+
+Sub menufantast_Click
+	
+End Sub
+
+Sub menunew_Click
+	
+End Sub
+
+Sub menuhome_Click
+	navi.CloseDrawer2(navi.GRAVITY_END)
+	index_ScrollView.Panel.RemoveAllViews
+	extra.load_index
+	extra.index_ob_olaviyat(0) = 1
+	extra.flag_procpnl = 0
+	extra.index_ob_top = 0
+	extra.index_ob_top_cach = 0
+	extra.propertyjson = 0
+End Sub
+
+Sub menucategory_Click
+	
+End Sub

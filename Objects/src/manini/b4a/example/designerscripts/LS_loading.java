@@ -15,9 +15,7 @@ views.get("logo").vw.setTop((int)((50d / 100 * height)-(100d * scale)));
 views.get("logo").vw.setLeft((int)((50d / 100 * width)-(100d * scale)));
 views.get("loadding_text").vw.setLeft((int)(0d));
 views.get("loadding_text").vw.setWidth((int)((100d / 100 * width) - (0d)));
-//BA.debugLineNum = 10;BA.debugLine="loadding_text.Height = 45dip"[loading/General script]
 views.get("loadding_text").vw.setHeight((int)((45d * scale)));
-//BA.debugLineNum = 11;BA.debugLine="loadding_text.Bottom = 95%y"[loading/General script]
 views.get("loadding_text").vw.setTop((int)((95d / 100 * height) - (views.get("loadding_text").vw.getHeight())));
 
 }

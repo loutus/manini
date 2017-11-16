@@ -32,7 +32,7 @@ public class main extends Activity implements B4AActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (isFirst) {
-			processBA = new anywheresoftware.b4a.ShellBA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.main");
+			processBA = new BA(this.getApplicationContext(), null, null, "manini.b4a.example", "manini.b4a.example.main");
 			processBA.loadHtSubs(this.getClass());
 	        float deviceScale = getApplicationContext().getResources().getDisplayMetrics().density;
 	        BALayout.setDeviceScale(deviceScale);
@@ -320,100 +320,6 @@ public class main extends Activity implements B4AActivity{
             
     }
 
-
-
-public static void initializeProcessGlobals() {
-    
-    if (main.processGlobalsRun == false) {
-	    main.processGlobalsRun = true;
-		try {
-		        anywheresoftware.b4a.samples.httputils2.httputils2service._process_globals();
-		
-        } catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-    }
-}
-public static boolean isAnyActivityVisible() {
-    boolean vis = false;
-vis = vis | (main.mostCurrent != null);
-vis = vis | (index.mostCurrent != null);
-vis = vis | (product.mostCurrent != null);
-vis = vis | (property.mostCurrent != null);
-vis = vis | (omid.mostCurrent != null);
-return vis;}
-
-private static BA killProgramHelper(BA ba) {
-    if (ba == null)
-        return null;
-    anywheresoftware.b4a.BA.SharedProcessBA sharedProcessBA = ba.sharedProcessBA;
-    if (sharedProcessBA == null || sharedProcessBA.activityBA == null)
-        return null;
-    return sharedProcessBA.activityBA.get();
-}
-public static void killProgram() {
-     {
-            Activity __a = null;
-            if (main.previousOne != null) {
-				__a = main.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(main.mostCurrent == null ? null : main.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
-BA.applicationContext.stopService(new android.content.Intent(BA.applicationContext, starter.class));
- {
-            Activity __a = null;
-            if (index.previousOne != null) {
-				__a = index.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(index.mostCurrent == null ? null : index.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
- {
-            Activity __a = null;
-            if (product.previousOne != null) {
-				__a = product.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(product.mostCurrent == null ? null : product.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
- {
-            Activity __a = null;
-            if (property.previousOne != null) {
-				__a = property.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(property.mostCurrent == null ? null : property.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
- {
-            Activity __a = null;
-            if (omid.previousOne != null) {
-				__a = omid.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(omid.mostCurrent == null ? null : omid.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
-}
 public anywheresoftware.b4a.keywords.Common __c = null;
 public anywheresoftware.b4a.objects.Timer _timer_cheknet = null;
 public anywheresoftware.b4a.objects.ImageViewWrapper _logo = null;
@@ -425,127 +331,123 @@ public manini.b4a.example.index _index = null;
 public manini.b4a.example.product _product = null;
 public manini.b4a.example.property _property = null;
 public manini.b4a.example.omid _omid = null;
+
+public static boolean isAnyActivityVisible() {
+    boolean vis = false;
+vis = vis | (main.mostCurrent != null);
+vis = vis | (index.mostCurrent != null);
+vis = vis | (product.mostCurrent != null);
+vis = vis | (property.mostCurrent != null);
+vis = vis | (omid.mostCurrent != null);
+return vis;}
 public static String  _activity_create(boolean _firsttime) throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_create"))
-	return (String) Debug.delegate(mostCurrent.activityBA, "activity_create", new Object[] {_firsttime});
-RDebugUtils.currentLine=131072;
- //BA.debugLineNum = 131072;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
-RDebugUtils.currentLine=131074;
- //BA.debugLineNum = 131074;BA.debugLine="Activity.LoadLayout(\"loading\")";
+ //BA.debugLineNum = 24;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+ //BA.debugLineNum = 26;BA.debugLine="Activity.LoadLayout(\"loading\")";
 mostCurrent._activity.LoadLayout("loading",mostCurrent.activityBA);
-RDebugUtils.currentLine=131075;
- //BA.debugLineNum = 131075;BA.debugLine="logo.Bitmap = LoadBitmap ( File.DirAssets,\"filese";
+ //BA.debugLineNum = 27;BA.debugLine="logo.Bitmap = LoadBitmap ( File.DirAssets,\"filese";
 mostCurrent._logo.setBitmap((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"fileset/logo.png").getObject()));
-RDebugUtils.currentLine=131076;
- //BA.debugLineNum = 131076;BA.debugLine="cheknet";
+ //BA.debugLineNum = 28;BA.debugLine="cheknet";
 _cheknet();
-RDebugUtils.currentLine=131079;
- //BA.debugLineNum = 131079;BA.debugLine="End Sub";
-return "";
-}
-public static String  _cheknet() throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "cheknet"))
-	return (String) Debug.delegate(mostCurrent.activityBA, "cheknet", null);
-anywheresoftware.b4a.samples.httputils2.httpjob _cheknetjob = null;
-RDebugUtils.currentLine=3473408;
- //BA.debugLineNum = 3473408;BA.debugLine="Sub cheknet()";
-RDebugUtils.currentLine=3473409;
- //BA.debugLineNum = 3473409;BA.debugLine="Log(\"cheknet\")";
-anywheresoftware.b4a.keywords.Common.Log("cheknet");
-RDebugUtils.currentLine=3473410;
- //BA.debugLineNum = 3473410;BA.debugLine="Dim cheknetjob As HttpJob";
-_cheknetjob = new anywheresoftware.b4a.samples.httputils2.httpjob();
-RDebugUtils.currentLine=3473411;
- //BA.debugLineNum = 3473411;BA.debugLine="cheknetjob.Initialize(\"cheknet\",Me)";
-_cheknetjob._initialize(processBA,"cheknet",main.getObject());
-RDebugUtils.currentLine=3473412;
- //BA.debugLineNum = 3473412;BA.debugLine="cheknetjob.PostString(extra.api,\"op=cheknet\")";
-_cheknetjob._poststring(mostCurrent._extra._api,"op=cheknet");
-RDebugUtils.currentLine=3473413;
- //BA.debugLineNum = 3473413;BA.debugLine="End Sub";
+ //BA.debugLineNum = 31;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
-RDebugUtils.currentModule="main";
-RDebugUtils.currentLine=262144;
- //BA.debugLineNum = 262144;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
-RDebugUtils.currentLine=262145;
- //BA.debugLineNum = 262145;BA.debugLine="End Sub";
+ //BA.debugLineNum = 59;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 60;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_resume"))
-	return (String) Debug.delegate(mostCurrent.activityBA, "activity_resume", null);
-RDebugUtils.currentLine=196608;
- //BA.debugLineNum = 196608;BA.debugLine="Sub Activity_Resume";
-RDebugUtils.currentLine=196610;
- //BA.debugLineNum = 196610;BA.debugLine="End Sub";
+ //BA.debugLineNum = 55;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 57;BA.debugLine="End Sub";
+return "";
+}
+public static String  _cheknet() throws Exception{
+anywheresoftware.b4a.samples.httputils2.httpjob _cheknetjob = null;
+ //BA.debugLineNum = 49;BA.debugLine="Sub cheknet()";
+ //BA.debugLineNum = 50;BA.debugLine="Log(\"cheknet\")";
+anywheresoftware.b4a.keywords.Common.Log("cheknet");
+ //BA.debugLineNum = 51;BA.debugLine="Dim cheknetjob As HttpJob";
+_cheknetjob = new anywheresoftware.b4a.samples.httputils2.httpjob();
+ //BA.debugLineNum = 52;BA.debugLine="cheknetjob.Initialize(\"cheknet\",Me)";
+_cheknetjob._initialize(processBA,"cheknet",main.getObject());
+ //BA.debugLineNum = 53;BA.debugLine="cheknetjob.PostString(extra.api,\"op=cheknet\")";
+_cheknetjob._poststring(mostCurrent._extra._api,"op=cheknet");
+ //BA.debugLineNum = 54;BA.debugLine="End Sub";
+return "";
+}
+public static String  _globals() throws Exception{
+ //BA.debugLineNum = 17;BA.debugLine="Sub Globals";
+ //BA.debugLineNum = 20;BA.debugLine="Dim timer_cheknet As Timer";
+mostCurrent._timer_cheknet = new anywheresoftware.b4a.objects.Timer();
+ //BA.debugLineNum = 21;BA.debugLine="Private logo As ImageView";
+mostCurrent._logo = new anywheresoftware.b4a.objects.ImageViewWrapper();
+ //BA.debugLineNum = 22;BA.debugLine="Private loadding_text As Label";
+mostCurrent._loadding_text = new anywheresoftware.b4a.objects.LabelWrapper();
+ //BA.debugLineNum = 23;BA.debugLine="End Sub";
 return "";
 }
 public static String  _jobdone(anywheresoftware.b4a.samples.httputils2.httpjob _job) throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "jobdone"))
-	return (String) Debug.delegate(mostCurrent.activityBA, "jobdone", new Object[] {_job});
-RDebugUtils.currentLine=3407872;
- //BA.debugLineNum = 3407872;BA.debugLine="Sub jobdone(job As HttpJob)";
-RDebugUtils.currentLine=3407873;
- //BA.debugLineNum = 3407873;BA.debugLine="If job.Success = True Then";
+ //BA.debugLineNum = 32;BA.debugLine="Sub jobdone(job As HttpJob)";
+ //BA.debugLineNum = 33;BA.debugLine="If job.Success = True Then";
 if (_job._success==anywheresoftware.b4a.keywords.Common.True) { 
-RDebugUtils.currentLine=3407874;
- //BA.debugLineNum = 3407874;BA.debugLine="Log(job.JobName)";
+ //BA.debugLineNum = 34;BA.debugLine="Log(job.JobName)";
 anywheresoftware.b4a.keywords.Common.Log(_job._jobname);
-RDebugUtils.currentLine=3407875;
- //BA.debugLineNum = 3407875;BA.debugLine="If job.JobName = \"cheknet\" Then";
+ //BA.debugLineNum = 35;BA.debugLine="If job.JobName = \"cheknet\" Then";
 if ((_job._jobname).equals("cheknet")) { 
-RDebugUtils.currentLine=3407876;
- //BA.debugLineNum = 3407876;BA.debugLine="Log(job.GetString)";
+ //BA.debugLineNum = 36;BA.debugLine="Log(job.GetString)";
 anywheresoftware.b4a.keywords.Common.Log(_job._getstring());
-RDebugUtils.currentLine=3407877;
- //BA.debugLineNum = 3407877;BA.debugLine="If job.GetString = \"ok\" Then";
+ //BA.debugLineNum = 37;BA.debugLine="If job.GetString = \"ok\" Then";
 if ((_job._getstring()).equals("ok")) { 
-RDebugUtils.currentLine=3407878;
- //BA.debugLineNum = 3407878;BA.debugLine="timer_cheknet.Enabled = False";
+ //BA.debugLineNum = 38;BA.debugLine="timer_cheknet.Enabled = False";
 mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.False);
-RDebugUtils.currentLine=3407879;
- //BA.debugLineNum = 3407879;BA.debugLine="timer_cheknet.Interval = 0";
+ //BA.debugLineNum = 39;BA.debugLine="timer_cheknet.Interval = 0";
 mostCurrent._timer_cheknet.setInterval((long) (0));
-RDebugUtils.currentLine=3407880;
- //BA.debugLineNum = 3407880;BA.debugLine="StartActivity(index)";
+ //BA.debugLineNum = 40;BA.debugLine="StartActivity(index)";
 anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._index.getObject()));
-RDebugUtils.currentLine=3407881;
- //BA.debugLineNum = 3407881;BA.debugLine="Activity.Finish";
+ //BA.debugLineNum = 41;BA.debugLine="Activity.Finish";
 mostCurrent._activity.Finish();
  }else {
-RDebugUtils.currentLine=3407883;
- //BA.debugLineNum = 3407883;BA.debugLine="loadding_text.Text = \"اتصال خود به اینترنت را";
+ //BA.debugLineNum = 43;BA.debugLine="loadding_text.Text = \"اتصال خود به اینترنت را";
 mostCurrent._loadding_text.setText(BA.ObjectToCharSequence("اتصال خود به اینترنت را چک کنید"));
-RDebugUtils.currentLine=3407884;
- //BA.debugLineNum = 3407884;BA.debugLine="timer_cheknet.Enabled = True";
+ //BA.debugLineNum = 44;BA.debugLine="timer_cheknet.Enabled = True";
 mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.True);
  };
  };
  };
-RDebugUtils.currentLine=3407888;
- //BA.debugLineNum = 3407888;BA.debugLine="End Sub";
+ //BA.debugLineNum = 48;BA.debugLine="End Sub";
+return "";
+}
+
+public static void initializeProcessGlobals() {
+    
+    if (main.processGlobalsRun == false) {
+	    main.processGlobalsRun = true;
+		try {
+		        anywheresoftware.b4a.samples.httputils2.httputils2service._process_globals();
+main._process_globals();
+starter._process_globals();
+extra._process_globals();
+index._process_globals();
+product._process_globals();
+property._process_globals();
+omid._process_globals();
+		
+        } catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+    }
+}public static String  _process_globals() throws Exception{
+ //BA.debugLineNum = 13;BA.debugLine="Sub Process_Globals";
+ //BA.debugLineNum = 16;BA.debugLine="End Sub";
 return "";
 }
 public static String  _timer_cheknet_tick() throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "timer_cheknet_tick"))
-	return (String) Debug.delegate(mostCurrent.activityBA, "timer_cheknet_tick", null);
-RDebugUtils.currentLine=3538944;
- //BA.debugLineNum = 3538944;BA.debugLine="Sub timer_cheknet_Tick";
-RDebugUtils.currentLine=3538945;
- //BA.debugLineNum = 3538945;BA.debugLine="Log(\"tick\")";
+ //BA.debugLineNum = 61;BA.debugLine="Sub timer_cheknet_Tick";
+ //BA.debugLineNum = 62;BA.debugLine="Log(\"tick\")";
 anywheresoftware.b4a.keywords.Common.Log("tick");
-RDebugUtils.currentLine=3538946;
- //BA.debugLineNum = 3538946;BA.debugLine="cheknet";
+ //BA.debugLineNum = 63;BA.debugLine="cheknet";
 _cheknet();
-RDebugUtils.currentLine=3538947;
- //BA.debugLineNum = 3538947;BA.debugLine="End Sub";
+ //BA.debugLineNum = 64;BA.debugLine="End Sub";
 return "";
 }
 }

@@ -20,7 +20,6 @@ views.get("label1").vw.setTop((int)(0d));
 views.get("label1").vw.setHeight((int)((55d * scale) - (0d)));
 views.get("scrollview1").vw.setLeft((int)(0d));
 views.get("scrollview1").vw.setWidth((int)((100d / 100 * width) - (0d)));
-//BA.debugLineNum = 12;BA.debugLine="ScrollView1.SetTopAndBottom(55dip,100%y)"[property/General script]
 views.get("scrollview1").vw.setTop((int)((55d * scale)));
 views.get("scrollview1").vw.setHeight((int)((100d / 100 * height) - ((55d * scale))));
 

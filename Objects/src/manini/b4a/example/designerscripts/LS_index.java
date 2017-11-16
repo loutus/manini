@@ -24,6 +24,12 @@ views.get("index_scrollview").vw.setWidth((int)((100d / 100 * width) - (0d)));
 views.get("index_scrollview").vw.setHeight((int)((100d / 100 * height)-(views.get("header").vw.getHeight())));
 //BA.debugLineNum = 8;BA.debugLine="index_ScrollView.Top  = header.Bottom"[index/General script]
 views.get("index_scrollview").vw.setTop((int)((views.get("header").vw.getTop() + views.get("header").vw.getHeight())));
+//BA.debugLineNum = 11;BA.debugLine="menubtn.Height=35dip"[index/General script]
+views.get("menubtn").vw.setHeight((int)((35d * scale)));
+//BA.debugLineNum = 12;BA.debugLine="menubtn.Width = 35dip"[index/General script]
+views.get("menubtn").vw.setWidth((int)((35d * scale)));
+//BA.debugLineNum = 13;BA.debugLine="menubtn.Right = 100%x-10dip"[index/General script]
+views.get("menubtn").vw.setLeft((int)((100d / 100 * width)-(10d * scale) - (views.get("menubtn").vw.getWidth())));
 
 }
 }

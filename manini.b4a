@@ -9,22 +9,23 @@ Module6=omid
 Build1=Default,manini.b4a.example
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="5" android:targetSdkVersion="19"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~'End of default text.~\n~~\n~SetApplicationAttribute(android:largeHeap,"true")
 IconFile=
-NumberOfFiles=14
+NumberOfFiles=15
 File1=index.bal
 File2=index.bas
 File3=like.png
 File4=loading.bal
 File5=main_defult_product.jpg
-File6=product.bal
-File7=product_img1.bal
-File8=product_img2.bal
-File9=property.bal
-File10=shadowbox.png
-File11=shadowbox-small.png
-File12=sharing-interface.png
-File13=Thumbs.db
-File14=yekan.ttf
-NumberOfLibraries=9
+File6=menu.bal
+File7=product.bal
+File8=product_img1.bal
+File9=product_img2.bal
+File10=property.bal
+File11=shadowbox.png
+File12=shadowbox-small.png
+File13=sharing-interface.png
+File14=Thumbs.db
+File15=yekan.ttf
+NumberOfLibraries=10
 Library1=core
 Library2=okhttputils2
 Library3=reflection
@@ -34,6 +35,7 @@ Library6=fontawesome
 Library7=shadow
 Library8=rtljustifytextview
 Library9=stringutils
+Library10=ahnavigationdrawer
 @EndOfDesignText@
 #Region  Project Attributes 
 	#ApplicationLabel: Manini
