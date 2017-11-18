@@ -10,6 +10,7 @@ Sub Process_Globals
 	'These variables can be accessed from all modules.
 	Dim api As String = "http://itrx.babapkg.ir/api.php"
 	Dim image_address As String = "http://itrx.babapkg.ir/image/cache/"
+	Dim image_address_nc As String = "http://itrx.babapkg.ir/image/"
 	Dim share_link As String = "http://itrx.babapkg.ir/index.php?route=product/product&product_id="
 	Dim index_ob_top As Int = 0
 	Dim index_ob_top_cach As Int =10dip
@@ -43,12 +44,15 @@ Sub main_download_lastproduct(indexf,image)
 	downloader.Initialize("downloadimglastproc*" & indexf & "*" & image,index )
 	downloader.Download( image)
 End Sub
-
+Sub main_download_categorypic(indexf,image)
+	Dim downloader As HttpJob
+	downloader.Initialize("downloadimgcategory*" & indexf & "*" & image,index )
+	downloader.Download( image)
+End Sub
 Sub main_download_product(indexf,image)
-
 	Dim downloader As HttpJob
 	downloader.Initialize("downloadimgproduct*" & indexf & "*" & image,index )
-	downloader.Download( image)
+	downloader.Download(  image)
 End Sub
 'Sub load_category_main()
 '	Dim load_category As HttpJob

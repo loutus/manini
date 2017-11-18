@@ -29,46 +29,54 @@ Sub Globals
 	Dim headerproc(5000)  As Panel
 	Dim headerproctxt(5000)  As Label
 	Dim procimage(5000) As ImageView
+	Dim categoryimg(50) As ImageView
+	Dim cat_title(70) As Label
+	Dim cat_title_line As Panel
+	Dim Pagerc As AHViewPager
+	Dim productheader As HorizontalScrollView
 	Dim property_pnl As ScrollView
+	Private appbg As Panel
+	Private categorypnl As Panel
+	Private categoryscroll As ScrollView
 End Sub
 Sub activity_KeyPress (KeyCode As Int) As Boolean 'Return True to consume the event
 	
 	If KeyCode= KeyCodes.KEYCODE_BACK Then
-		If extra.propertyjson = 1 Then 
-			property_pnl.RemoveView
-			property_pnl.Visible = False
-			extra.propertyjson = 0
-			Return True
-		Else If extra.flag_procpnl = 0 Then 
-				extra.procimg_flag = 0
-				Return False
+		If categorypnl.Visible =True Then 
+				categorypnl.Visible = False
+				Return True
 			Else
-			 
-			extra.procimg_flag =extra.procimg_flag -  extra.procimg_count(extra.flag_procpnl-1) 'dispose imge location
-
-			headerproc(extra.flag_procpnl-1).Visible = False
-			product_ScrollView(extra.flag_procpnl-1).RemoveView
-			product_ScrollView(extra.flag_procpnl-1).Visible = False
-			extra.flag_procpnl = extra.flag_procpnl - 1
-			Return True
+					If extra.propertyjson = 1 Then
+						property_pnl.RemoveView
+						property_pnl.Visible = False
+						extra.propertyjson = 0
+						Return True
+					Else If extra.flag_procpnl = 0 Then
+						extra.procimg_flag = 0
+						Return False
+					Else
+						extra.procimg_flag =extra.procimg_flag -  extra.procimg_count(extra.flag_procpnl-1) 'dispose imge location
+						headerproc(extra.flag_procpnl-1).Visible = False
+						product_ScrollView(extra.flag_procpnl-1).RemoveView
+						product_ScrollView(extra.flag_procpnl-1).Visible = False
+						extra.flag_procpnl = extra.flag_procpnl - 1
+						Return True
+					End If
 		End If
-		
 	End If
 End Sub
 Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("index")
 	navi.Initialize2("navi",Activity,50%x,navi.GRAVITY_RIGHT)
 	navi.NavigationPanel.Color = Colors.ARGB(150,236,239,241)
 	
-	' در خط زیر لایوتی که مربوط به اسلاید منو است را لود کنید
+	
 	navi.NavigationPanel.LoadLayout("menu")
 	navi.NavigationPanel.BringToFront
 	pCantent.Initialize("")
 	navi.ContentPanel.AddView(pCantent,0,0,100%x,100%y)
 
-	
-	' در خط زیر لایوت اصلی مربوط به این اکتیویتی را لود کنید
 	pCantent.LoadLayout("index")
-
 	pCantent.Color = Colors.RGB(234,234,234)
 	'Do not forget to load the layout file created with the visual designer.
 	'Activity.LoadLayout("index")
@@ -183,10 +191,188 @@ Catch
 	Log(LastException)
 End Try
 End Sub
+Sub Pagerc_PageChanged (Position As Int)
+
+	cat_title_line.SetLayoutAnimated(300,	cat_title(Position).Left,cat_title_line.Top, 	cat_title(Position).Width,2dip)
+	productheader.ScrollPosition=	cat_title(Position).Left
+  
+	Log(Position)
+End Sub
 Sub jobdone(job As HttpJob)
 
 If job.Success = True Then
 	Select job.JobName	 
+			Case "getsubcategorydescription"
+				Dim topseting As Int =0
+				Dim pagecount As Int=-1
+				Dim pagecountflag As Int=0
+				Dim pageflag As Int=0
+				Log(job.GetString)
+				Dim pan(500) As Panel				
+				Dim Containerc As AHPageContainer
+			
+				Containerc.Initialize
+				Dim parser As JSONParser
+				parser.Initialize(job.GetString)
+				Dim root As List = parser.NextArray
+				For Each colroot As Map In root
+					Dim catname As String = colroot.Get("catname")
+					Dim proname As String = colroot.Get("proname")
+					Dim id As String = colroot.Get("id")
+					If pagecount <> id Then
+						topseting =0
+						pageflag = pageflag + 1
+						pagecount = id
+						pan(pageflag).Initialize("")
+						Containerc.AddPageAt(pan(pageflag), "Main", 0)
+						pagecountflag= pagecountflag+ 1
+					End If
+					
+					Dim cd As ColorDrawable
+					cd.Initialize (Colors.rgb(230, 230, 230),6dip)
+					Dim bg As Panel
+					bg.Initialize("")
+					bg.Background =cd
+					pan(pageflag).AddView(bg,5dip,topseting,100%x-10dip,170dip)
+					
+					Dim cd As ColorDrawable
+					cd.Initialize (Colors.rgb(242, 242, 242),6dip)
+					Dim bg As Panel
+					bg.Initialize("")
+					bg.Background =cd
+					pan(pageflag).AddView(bg,6dip,topseting+1dip,100%x-12dip,168dip)
+					
+					
+					Dim procname As Label
+					procname.Initialize("")
+					procname.Text = proname
+					procname.TextColor = Colors.Black
+					procname.Gravity = Gravity.RIGHT
+					pan(pageflag).AddView(procname,40%x,topseting+20dip,60%x-30dip,25dip)
+					topseting = topseting + 175dip
+					
+				Next
+				Pagerc.Initialize2(Containerc, "Pagerc")
+				
+				categoryscroll.Panel.AddView(Pagerc,0,55dip,100%x,100%y-55dip)
+				
+				Log(" page cound " & pagecountflag)
+				categoryscroll.Panel.Height = 100%y
+				categoryscroll.Panel.Color = Colors.White
+ 			
+			Case "subcategory"
+				Try
+					Dim parser As JSONParser
+					parser.Initialize(job.GetString)
+					Dim root As List = parser.NextArray
+					Dim leftset As Int=2dip
+				
+					categoryscroll.Panel.RemoveAllViews
+					
+					productheader.Initialize(100%x,"")
+					productheader.Color=Colors.rgb(75, 231, 200)
+					Dim yekanfont As Typeface
+					yekanfont = Typeface.LoadFromAssets("yekan.ttf")
+					categoryscroll.Panel.AddView(productheader,0,0,100%x,50dip)
+					
+					Dim r As Reflector
+					r.Target = productheader
+					r.RunMethod2("setHorizontalScrollBarEnabled", False, "java.lang.boolean")
+					r.RunMethod2("setOverScrollMode", 2, "java.lang.int" )
+					Dim flagt As Int = 0
+					For Each colroot As Map In root
+						Dim image As String = colroot.Get("image")
+						Dim name As String = colroot.Get("name")
+						Dim id As String = colroot.Get("id")
+						
+						cat_title(flagt).Initialize("cat_title")
+						cat_title(flagt).Text = name
+						cat_title(flagt).Tag = flagt
+						cat_title(flagt).Gravity = Gravity.CENTER
+						cat_title(flagt).TextColor = Colors.Black
+						cat_title(flagt).Typeface = yekanfont
+						cat_title(flagt).TextSize = 9dip
+						
+						productheader.Panel.AddView(cat_title(flagt),leftset,0,name.Length*12dip,50dip)
+						leftset = leftset + (name.Length*12dip)  + 2dip
+						flagt = flagt + 1
+					Next
+					
+					
+					cat_title_line.Initialize("")
+					cat_title_line.Color = Colors.rgb(18, 135, 111)
+					productheader.Panel.AddView(cat_title_line,0,48dip,cat_title(0).Width,2dip)
+					productheader.Panel.Width = leftset + 2dip
+					categoryscroll.Color = Colors.White
+					
+			Catch
+				Log(LastException)
+			End Try
+			Case "categorypage"
+				Dim flag As Int=0
+				Dim gflag As Boolean=False
+				Log(job.GetString)
+				Dim topset As Int = 55dip
+				Dim leftset As Int=5dip
+				Dim parser As JSONParser
+				parser.Initialize(job.GetString)
+				Dim root As List = parser.NextArray
+				For Each colroot As Map In root
+					Dim image As String = colroot.Get("image")
+					Dim name As String = colroot.Get("name")
+					Dim id As String = colroot.Get("id")
+					Dim filename As String
+					filename = image.SubString(image.LastIndexOf("/")+1)
+					Log(filename)
+'					Dim lable As Label
+'					lable.Initialize("")
+'					lable.Text = name
+'					'lable.Color = Colors.White
+'					lable.TextColor = Colors.Black
+'					lable.Typeface = Typeface.LoadFromAssets("yekan.ttf")
+'					lable.Gravity = Gravity.RIGHT
+'					lable.TextSize = 9dip
+'					categoryscroll.Panel.AddView(lable,35%x,topset-10dip,65%x-15dip,25dip)
+'					
+'					
+
+					categoryimg(flag).Initialize("categoryitem")
+					If File.Exists(File.DirInternalCache,filename) = True Then
+							categoryimg(flag).Bitmap = LoadBitmap(File.DirInternalCache,filename)
+						Else
+							categoryimg(flag).Bitmap = LoadBitmap(File.DirAssets,"main_defult_product.jpg")
+						extra.main_download_categorypic(flag,extra.image_address_nc &image)
+						Log("file " & extra.image_address_nc &image)
+					End If
+				
+					categoryimg(flag).Gravity = Gravity.FILL
+					categoryimg(flag).Tag = id
+					If leftset=5dip Then 
+						gflag=False
+						categoryscroll.Panel.AddView(categoryimg(flag),leftset , topset-49dip,50%x-8dip,50%x-8dip)
+						leftset = 50%x-8dip
+						Else
+						gflag=True
+						categoryscroll.Panel.AddView(categoryimg(flag),leftset +10dip, topset-49dip,50%x-8dip,50%x-8dip)
+						topset = topset + (50%x-8)
+						leftset=5dip
+					End If
+				
+'					
+'					Dim pnl As Panel
+'					pnl.Initialize("")
+'					pnl.Color = Colors.rgb(191, 191, 191)
+'					categoryscroll.Panel.AddView(pnl,0,topset+50dip,100%x,1dip)
+'					
+'					Dim pnlim As Panel
+'					pnlim.Initialize("categoryitem")
+'					pnlim.Tag=id
+'					categoryscroll.Panel.AddView(pnlim,0,topset-50dip,100%x,100dip)
+					flag = flag + 1
+				'	topset = topset + 100dip
+				Next
+				If gflag=False Then topset = topset  + 50%x-8 
+				categoryscroll.Panel.Height = topset 
 		Case "load_indexjob"
 				load_indexjob(job,True)
 				Case Else
@@ -194,12 +380,12 @@ If job.Success = True Then
 					If job.JobName.SubString2(0,13)="downloadimage" Then
 						Dim id As String = job.JobName.SubString2(job.JobName.IndexOf("*")+1,job.JobName.IndexOf("$"))
 						Dim img As String = job.JobName.SubString2(job.JobName.LastIndexOf("/")+1,job.JobName.LastIndexOf("#"))
-						Dim flag As String = job.JobName.SubString2(job.JobName.LastIndexOf("#")+1,job.JobName.Length)
+						Dim flag1 As String = job.JobName.SubString2(job.JobName.LastIndexOf("#")+1,job.JobName.Length)
 						Dim OutStream As OutputStream
 						OutStream = File.OpenOutput(File.DirInternalCache  & "/product"  ,  img, False)
 						File.Copy2(job.GetInputStream,OutStream)
 						OutStream.Close
-						imgdrew(flag).Bitmap = LoadBitmapSample(File.DirInternalCache  & "/product"  ,  img,200dip,200dip)
+						imgdrew(flag1).Bitmap = LoadBitmapSample(File.DirInternalCache  & "/product"  ,  img,200dip,200dip)
 					End If
 				Catch
 					'Log(LastException)
@@ -234,7 +420,7 @@ If job.Success = True Then
 							
 								procimage(extra.procimg_flag).Bitmap = LoadBitmap(File.DirInternalCache,filename)
 							Else
-								extra.main_download_product(extra.procimg_flag,image)
+								extra.main_download_product(extra.procimg_flag, image)
 								procimage(extra.procimg_flag).Bitmap = LoadBitmap(File.DirAssets,"main_defult_product.jpg")
 						End If
 							procimage(extra.procimg_flag).Gravity = Gravity.FILL
@@ -243,15 +429,14 @@ If job.Success = True Then
 							flagpanel = flagpanel + 1
 							extra.procimg_flag = extra.procimg_flag + 1
 					Next
-					
 						Log("indexer " & extra.procimg_flag )
 						extra.procimg_count(extra.flag_procpnl) = flagpanel
-					
-					Pager.Initialize2(Container, "Pager")
-					product_ScrollView(flagerpic).Panel.AddView(Pager,0,55dip,100%x,50%x)
-					Catch
-						Log(LastException)
-					End Try
+						
+						Pager.Initialize2(Container, "Pager")
+						product_ScrollView(flagerpic).Panel.AddView(Pager,0,55dip,100%x,50%x)
+						Catch
+							Log(LastException)
+						End Try
 				End If
 				Try
 					
@@ -305,13 +490,26 @@ If job.Success = True Then
 				End Try
 				
 				Try
+					If job.JobName.SubString2(0,19)="downloadimgcategory" Then
+						Dim index As Int
+						Dim name As String
+						index = job.JobName.SubString2(job.JobName.IndexOf("*")+1,job.JobName.LastIndexOf("*"))
+						name = job.JobName.SubString(job.JobName.LastIndexOf("/")+1)
+						Dim OutStream As OutputStream
+						OutStream = File.OpenOutput(File.DirInternalCache, name, False)
+						File.Copy2(job.GetInputStream,OutStream)
+						OutStream.Close
+						categoryimg(index).Bitmap = LoadBitmap(File.DirInternalCache, name)
+					End If
+				Catch
+					Log("error downloadimglastproc job")
+				End Try
+				Try
 					If job.JobName.SubString2(0,19)="downloadimglastproc" Then
 						Dim index As Int
 						Dim name As String
 						index = job.JobName.SubString2(job.JobName.IndexOf("*")+1,job.JobName.LastIndexOf("*"))
 						name = job.JobName.SubString(job.JobName.LastIndexOf("/")+1)
-						Log(index)
-						Log(name)
 						Dim OutStream As OutputStream
 						OutStream = File.OpenOutput(File.DirInternalCache, name, False)
 						File.Copy2(job.GetInputStream,OutStream)
@@ -657,7 +855,7 @@ Sub index_draw(size As String,flag,id,img,model)
 		End Select
 	End If
 	
-	Dim cd As ColorDrawable
+	'Dim cd As ColorDrawable
 	'cd.Initialize (Colors.White,10dip)
 	'panel.Background = cd
 	lbl.Gravity = Gravity.FILL
@@ -1019,5 +1217,50 @@ Sub menuhome_Click
 End Sub
 
 Sub menucategory_Click
+	categoryscroll.Panel.RemoveAllViews
+	navi.CloseDrawer2(navi.GRAVITY_END)
+	categorypnl.Visible = True
+	Dim  a As Animation
+	a.InitializeAlpha("",0, 1)
+	a.Duration = 500
+	a.Start(categorypnl)
+	 Dim download As HttpJob
+	 download.Initialize("categorypage",Me)
+	download.PostString(extra.api,"op=getcategory")
+End Sub
+
+Sub catmenubtn_Click
+	navi.CloseDrawer2(navi.GRAVITY_END)
+	Dim  a As Animation
+	a.InitializeAlpha("animationexitcategory",1, 0)
+	a.Duration = 500
+	a.Start(categorypnl)
+End Sub
+
+Sub animationexitcategory_AnimationEnd
+	categorypnl.Visible = False
+End Sub
+
+Sub categoryitem_Click
+	Dim imgdre As ImageView
+	imgdre = Sender
+	Log(imgdre.Tag)
 	
+	Dim download As HttpJob
+	download.Initialize("subcategory",Me)
+	download.PostString(extra.api,"op=getsubcategory&id="& imgdre.Tag)
+
+
+	Dim download2 As HttpJob
+	download2.Initialize("getsubcategorydescription",Me)
+	download2.PostString (extra.api,"op=getsubcategorydescription&id=" & imgdre.Tag)
+	
+End Sub
+
+Sub cat_title_Click
+	Dim target As Label
+	target = Sender
+	'cat_title_line.SetLayoutAnimated(300,target.Left,cat_title_line.Top, target.Width,2dip)
+	productheader.ScrollPosition=target.Left 
+	Pagerc.GotoPage(target.Tag,True)
 End Sub
