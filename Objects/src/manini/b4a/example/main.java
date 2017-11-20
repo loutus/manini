@@ -341,80 +341,80 @@ vis = vis | (property.mostCurrent != null);
 vis = vis | (omid.mostCurrent != null);
 return vis;}
 public static String  _activity_create(boolean _firsttime) throws Exception{
- //BA.debugLineNum = 24;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
- //BA.debugLineNum = 26;BA.debugLine="Activity.LoadLayout(\"loading\")";
+ //BA.debugLineNum = 20;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+ //BA.debugLineNum = 21;BA.debugLine="Activity.LoadLayout(\"loading\")";
 mostCurrent._activity.LoadLayout("loading",mostCurrent.activityBA);
- //BA.debugLineNum = 27;BA.debugLine="logo.Bitmap = LoadBitmap ( File.DirAssets,\"filese";
+ //BA.debugLineNum = 22;BA.debugLine="logo.Bitmap = LoadBitmap ( File.DirAssets,\"filese";
 mostCurrent._logo.setBitmap((android.graphics.Bitmap)(anywheresoftware.b4a.keywords.Common.LoadBitmap(anywheresoftware.b4a.keywords.Common.File.getDirAssets(),"fileset/logo.png").getObject()));
- //BA.debugLineNum = 28;BA.debugLine="cheknet";
+ //BA.debugLineNum = 23;BA.debugLine="cheknet";
 _cheknet();
- //BA.debugLineNum = 31;BA.debugLine="End Sub";
+ //BA.debugLineNum = 24;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
- //BA.debugLineNum = 59;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
- //BA.debugLineNum = 60;BA.debugLine="End Sub";
+ //BA.debugLineNum = 50;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+ //BA.debugLineNum = 51;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
- //BA.debugLineNum = 55;BA.debugLine="Sub Activity_Resume";
- //BA.debugLineNum = 57;BA.debugLine="End Sub";
+ //BA.debugLineNum = 48;BA.debugLine="Sub Activity_Resume";
+ //BA.debugLineNum = 49;BA.debugLine="End Sub";
 return "";
 }
 public static String  _cheknet() throws Exception{
 anywheresoftware.b4a.samples.httputils2.httpjob _cheknetjob = null;
- //BA.debugLineNum = 49;BA.debugLine="Sub cheknet()";
- //BA.debugLineNum = 50;BA.debugLine="Log(\"cheknet\")";
+ //BA.debugLineNum = 42;BA.debugLine="Sub cheknet()";
+ //BA.debugLineNum = 43;BA.debugLine="Log(\"cheknet\")";
 anywheresoftware.b4a.keywords.Common.Log("cheknet");
- //BA.debugLineNum = 51;BA.debugLine="Dim cheknetjob As HttpJob";
+ //BA.debugLineNum = 44;BA.debugLine="Dim cheknetjob As HttpJob";
 _cheknetjob = new anywheresoftware.b4a.samples.httputils2.httpjob();
- //BA.debugLineNum = 52;BA.debugLine="cheknetjob.Initialize(\"cheknet\",Me)";
+ //BA.debugLineNum = 45;BA.debugLine="cheknetjob.Initialize(\"cheknet\",Me)";
 _cheknetjob._initialize(processBA,"cheknet",main.getObject());
- //BA.debugLineNum = 53;BA.debugLine="cheknetjob.PostString(extra.api,\"op=cheknet\")";
+ //BA.debugLineNum = 46;BA.debugLine="cheknetjob.PostString(extra.api,\"op=cheknet\")";
 _cheknetjob._poststring(mostCurrent._extra._api,"op=cheknet");
- //BA.debugLineNum = 54;BA.debugLine="End Sub";
+ //BA.debugLineNum = 47;BA.debugLine="End Sub";
 return "";
 }
 public static String  _globals() throws Exception{
- //BA.debugLineNum = 17;BA.debugLine="Sub Globals";
- //BA.debugLineNum = 20;BA.debugLine="Dim timer_cheknet As Timer";
+ //BA.debugLineNum = 15;BA.debugLine="Sub Globals";
+ //BA.debugLineNum = 16;BA.debugLine="Dim timer_cheknet As Timer";
 mostCurrent._timer_cheknet = new anywheresoftware.b4a.objects.Timer();
- //BA.debugLineNum = 21;BA.debugLine="Private logo As ImageView";
+ //BA.debugLineNum = 17;BA.debugLine="Private logo As ImageView";
 mostCurrent._logo = new anywheresoftware.b4a.objects.ImageViewWrapper();
- //BA.debugLineNum = 22;BA.debugLine="Private loadding_text As Label";
+ //BA.debugLineNum = 18;BA.debugLine="Private loadding_text As Label";
 mostCurrent._loadding_text = new anywheresoftware.b4a.objects.LabelWrapper();
- //BA.debugLineNum = 23;BA.debugLine="End Sub";
+ //BA.debugLineNum = 19;BA.debugLine="End Sub";
 return "";
 }
 public static String  _jobdone(anywheresoftware.b4a.samples.httputils2.httpjob _job) throws Exception{
- //BA.debugLineNum = 32;BA.debugLine="Sub jobdone(job As HttpJob)";
- //BA.debugLineNum = 33;BA.debugLine="If job.Success = True Then";
+ //BA.debugLineNum = 25;BA.debugLine="Sub jobdone(job As HttpJob)";
+ //BA.debugLineNum = 26;BA.debugLine="If job.Success = True Then";
 if (_job._success==anywheresoftware.b4a.keywords.Common.True) { 
- //BA.debugLineNum = 34;BA.debugLine="Log(job.JobName)";
+ //BA.debugLineNum = 27;BA.debugLine="Log(job.JobName)";
 anywheresoftware.b4a.keywords.Common.Log(_job._jobname);
- //BA.debugLineNum = 35;BA.debugLine="If job.JobName = \"cheknet\" Then";
+ //BA.debugLineNum = 28;BA.debugLine="If job.JobName = \"cheknet\" Then";
 if ((_job._jobname).equals("cheknet")) { 
- //BA.debugLineNum = 36;BA.debugLine="Log(job.GetString)";
+ //BA.debugLineNum = 29;BA.debugLine="Log(job.GetString)";
 anywheresoftware.b4a.keywords.Common.Log(_job._getstring());
- //BA.debugLineNum = 37;BA.debugLine="If job.GetString = \"ok\" Then";
+ //BA.debugLineNum = 30;BA.debugLine="If job.GetString = \"ok\" Then";
 if ((_job._getstring()).equals("ok")) { 
- //BA.debugLineNum = 38;BA.debugLine="timer_cheknet.Enabled = False";
+ //BA.debugLineNum = 31;BA.debugLine="timer_cheknet.Enabled = False";
 mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.False);
- //BA.debugLineNum = 39;BA.debugLine="timer_cheknet.Interval = 0";
+ //BA.debugLineNum = 32;BA.debugLine="timer_cheknet.Interval = 0";
 mostCurrent._timer_cheknet.setInterval((long) (0));
- //BA.debugLineNum = 40;BA.debugLine="StartActivity(index)";
+ //BA.debugLineNum = 33;BA.debugLine="StartActivity(index)";
 anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._index.getObject()));
- //BA.debugLineNum = 41;BA.debugLine="Activity.Finish";
+ //BA.debugLineNum = 34;BA.debugLine="Activity.Finish";
 mostCurrent._activity.Finish();
  }else {
- //BA.debugLineNum = 43;BA.debugLine="loadding_text.Text = \"اتصال خود به اینترنت را";
+ //BA.debugLineNum = 36;BA.debugLine="loadding_text.Text = \"اتصال خود به اینترنت را";
 mostCurrent._loadding_text.setText(BA.ObjectToCharSequence("اتصال خود به اینترنت را چک کنید"));
- //BA.debugLineNum = 44;BA.debugLine="timer_cheknet.Enabled = True";
+ //BA.debugLineNum = 37;BA.debugLine="timer_cheknet.Enabled = True";
 mostCurrent._timer_cheknet.setEnabled(anywheresoftware.b4a.keywords.Common.True);
  };
  };
  };
- //BA.debugLineNum = 48;BA.debugLine="End Sub";
+ //BA.debugLineNum = 41;BA.debugLine="End Sub";
 return "";
 }
 
@@ -438,16 +438,16 @@ omid._process_globals();
     }
 }public static String  _process_globals() throws Exception{
  //BA.debugLineNum = 13;BA.debugLine="Sub Process_Globals";
- //BA.debugLineNum = 16;BA.debugLine="End Sub";
+ //BA.debugLineNum = 14;BA.debugLine="End Sub";
 return "";
 }
 public static String  _timer_cheknet_tick() throws Exception{
- //BA.debugLineNum = 61;BA.debugLine="Sub timer_cheknet_Tick";
- //BA.debugLineNum = 62;BA.debugLine="Log(\"tick\")";
+ //BA.debugLineNum = 52;BA.debugLine="Sub timer_cheknet_Tick";
+ //BA.debugLineNum = 53;BA.debugLine="Log(\"tick\")";
 anywheresoftware.b4a.keywords.Common.Log("tick");
- //BA.debugLineNum = 63;BA.debugLine="cheknet";
+ //BA.debugLineNum = 54;BA.debugLine="cheknet";
 _cheknet();
- //BA.debugLineNum = 64;BA.debugLine="End Sub";
+ //BA.debugLineNum = 55;BA.debugLine="End Sub";
 return "";
 }
 }

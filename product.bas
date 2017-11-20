@@ -42,13 +42,6 @@ Sub Activity_Create(FirstTime As Boolean)
 	'Do not forget to load the layout file created with the visual designer. For example:
 	Activity.LoadLayout("product")
 	
-	Dim downloadtext As HttpJob
-	downloadtext.Initialize("textproc",Me)
-	downloadtext.PostString(extra.api,"op=productdescription&id=" & extra.product_id_toshow)
-	
-	Dim download As HttpJob
-	download.Initialize("nameproc",Me)
-	download.PostString(extra.api,"op=product&id=" & extra.product_id_toshow)
 	
 	
 	

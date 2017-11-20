@@ -55,23 +55,16 @@ Library12=javaobject
 	#IncludeTitle:  False
 #End Region
 Sub Process_Globals
-	'These global variables will be declared once when the application starts.
-	'These variables can be accessed from all modules.
 End Sub
 Sub Globals
-	'These global variables will be redeclared each time the activity is created.
-	'These variables can only be accessed from this module.
 	Dim timer_cheknet As Timer
 	Private logo As ImageView
 	Private loadding_text As Label
 End Sub
 Sub Activity_Create(FirstTime As Boolean)
-	'Do not forget to load the layout file created with the visual designer. For example:
 	Activity.LoadLayout("loading")
 	logo.Bitmap = LoadBitmap ( File.DirAssets,"fileset/logo.png")
 	cheknet
-	'timer_cheknet.Initialize("timer_cheknet",3000)
-	'timer_cheknet.Enabled = True
 End Sub
 Sub jobdone(job As HttpJob)
 	If job.Success = True Then  
@@ -97,9 +90,7 @@ Sub cheknet()
 	cheknetjob.PostString(extra.api,"op=cheknet")
 End Sub
 Sub Activity_Resume
-
 End Sub
-
 Sub Activity_Pause (UserClosed As Boolean)
 End Sub
 Sub timer_cheknet_Tick

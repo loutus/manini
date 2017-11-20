@@ -38,9 +38,11 @@ Sub Globals
 	Private appbg As Panel
 	Private categorypnl As Panel
 	Private categoryscroll As ScrollView
+	Dim cat_product_img(5000) As ImageView
+	Dim yekanfont As Typeface
+	yekanfont = Typeface.LoadFromAssets("yekan.ttf")
 End Sub
 Sub activity_KeyPress (KeyCode As Int) As Boolean 'Return True to consume the event
-	
 	If KeyCode= KeyCodes.KEYCODE_BACK Then
 		If categorypnl.Visible =True Then 
 				categorypnl.Visible = False
@@ -70,7 +72,6 @@ Sub Activity_Create(FirstTime As Boolean)
 	navi.Initialize2("navi",Activity,50%x,navi.GRAVITY_RIGHT)
 	navi.NavigationPanel.Color = Colors.ARGB(150,236,239,241)
 	
-	
 	navi.NavigationPanel.LoadLayout("menu")
 	navi.NavigationPanel.BringToFront
 	pCantent.Initialize("")
@@ -78,15 +79,11 @@ Sub Activity_Create(FirstTime As Boolean)
 
 	pCantent.LoadLayout("index")
 	pCantent.Color = Colors.RGB(234,234,234)
-	'Do not forget to load the layout file created with the visual designer.
-	'Activity.LoadLayout("index")
-	
 
-	'index_ScrollView.Panel.LoadLayout("indexdata")
+
  	If File.Exists(File.DirInternalCache & "/product","")=False Then 
 		File.MakeDir(File.DirInternalCache,"product"	)
 	End If
-
 
 	Dim r As Reflector
 	r.Target = index_ScrollView
@@ -96,9 +93,7 @@ Sub Activity_Create(FirstTime As Boolean)
 	extra.index_ob_olaviyat(0) = 1
 	extra.flag_procpnl = 0
 	extra.propertyjson = 0
-	
 End Sub
-
 Sub Activity_Resume
 End Sub
 Sub Activity_Pause (UserClosed As Boolean)
@@ -111,7 +106,6 @@ Sub index_ScrollView_ScrollChanged(Position As Int)
 		job.Initialize("",Me)
 		load_indexjob(job,False)
 	End If
-	 
 End Sub
 Sub load_indexjob(job As HttpJob,create As Boolean)
 	Try
@@ -122,9 +116,6 @@ Sub load_indexjob(job As HttpJob,create As Boolean)
 		Dim id As String = job.GetString.SubString2(0, job.GetString.IndexOf("*"))
 		Dim img As String = job.GetString.SubString2(job.GetString.IndexOf("*")+3,job.GetString.IndexOf("$"))
 		Dim modle As String = job.GetString.SubString2(job.GetString.IndexOf("$")+3,job.GetString.Length )
-		'					Log(id)
-		'					Log(img)
-		'					Log(modle)
 		Dim parser As JSONParser
 		parser.Initialize(id)
 		index_retrive_list= parser.NextArray
@@ -192,23 +183,33 @@ Catch
 End Try
 End Sub
 Sub Pagerc_PageChanged (Position As Int)
-
+Try		
 	cat_title_line.SetLayoutAnimated(300,	cat_title(Position).Left,cat_title_line.Top, 	cat_title(Position).Width,2dip)
 	productheader.ScrollPosition=	cat_title(Position).Left
   
+		Log(Position)
+	Catch
+		Pagerc.GotoPage(0,False)
+		cat_title_line.SetLayoutAnimated(300,	cat_title(0).Left,cat_title_line.Top, 	cat_title(0).Width,2dip)
+		productheader.ScrollPosition=	0
+	End Try
+End Sub
+Sub cat_productlist_ScrollChanged(Position As Int)
 	Log(Position)
 End Sub
 Sub jobdone(job As HttpJob)
-
 If job.Success = True Then
 	Select job.JobName	 
 			Case "getsubcategorydescription"
-				Dim topseting As Int =0
+				Dim list_height(500) As Int
+				
+				Dim topseting,pageflag_temp As Int =0
 				Dim pagecount As Int=-1
-				Dim pagecountflag As Int=0
+			
 				Dim pageflag As Int=0
 				Log(job.GetString)
-				Dim pan(500) As Panel				
+			
+				Dim cat_productlist(500) As ScrollView				
 				Dim Containerc As AHPageContainer
 			
 				Containerc.Initialize
@@ -218,14 +219,29 @@ If job.Success = True Then
 				For Each colroot As Map In root
 					Dim catname As String = colroot.Get("catname")
 					Dim proname As String = colroot.Get("proname")
-					Dim id As String = colroot.Get("id")
-					If pagecount <> id Then
-						topseting =0
+					Dim image As String = colroot.Get("image")
+					Dim price As String = colroot.Get("price")
+				   	Dim id As String = colroot.Get("id")
+					Dim catid As String = colroot.Get("catid")
+					
+					
+					
+					If pagecount <> catid Then
 						pageflag = pageflag + 1
-						pagecount = id
-						pan(pageflag).Initialize("")
-						Containerc.AddPageAt(pan(pageflag), "Main", 0)
-						pagecountflag= pagecountflag+ 1
+						pagecount = catid
+						Dim panlt As Panel
+						panlt.Initialize("")
+
+						cat_productlist(pageflag).Initialize2(1001,"cat_productlist")
+						topseting =5dip
+						panlt.AddView(cat_productlist(pageflag),0,0,100%x,100%y)
+						cat_productlist(pageflag).Color = Colors.rgb(242, 242, 242)
+						Containerc.AddPageAt(panlt, "Main", 0)
+						extra.pagecountflag= extra.pagecountflag+ 1
+						Dim r As Reflector
+						r.Target = cat_productlist(pageflag)
+						r.RunMethod2("setVerticalScrollBarEnabled", False, "java.lang.boolean")
+						r.RunMethod2("setOverScrollMode", 2, "java.lang.int" )
 					End If
 					
 					Dim cd As ColorDrawable
@@ -233,14 +249,15 @@ If job.Success = True Then
 					Dim bg As Panel
 					bg.Initialize("")
 					bg.Background =cd
-					pan(pageflag).AddView(bg,5dip,topseting,100%x-10dip,170dip)
-					
+					cat_productlist(pageflag).panel.AddView(bg,5dip,topseting,100%x-10dip,170dip)
+					'Colors.rgb(242, 242, 242)
 					Dim cd As ColorDrawable
-					cd.Initialize (Colors.rgb(242, 242, 242),6dip)
+					cd.Initialize (Colors.White,6dip)
 					Dim bg As Panel
-					bg.Initialize("")
+					bg.Initialize("cat_productlist_go")
 					bg.Background =cd
-					pan(pageflag).AddView(bg,6dip,topseting+1dip,100%x-12dip,168dip)
+					bg.Tag = id
+					cat_productlist(pageflag).panel.AddView(bg,6dip,topseting+1dip,100%x-12dip,168dip)
 					
 					
 					Dim procname As Label
@@ -248,16 +265,55 @@ If job.Success = True Then
 					procname.Text = proname
 					procname.TextColor = Colors.Black
 					procname.Gravity = Gravity.RIGHT
-					pan(pageflag).AddView(procname,40%x,topseting+20dip,60%x-30dip,25dip)
-					topseting = topseting + 175dip
+					'procname.Color = Colors.red
+					procname.Typeface = yekanfont
+					cat_productlist(pageflag).panel.AddView(procname,180dip,topseting+20dip,100%x-190dip,25dip)
 					
+					
+					Dim total As Label
+					total.Initialize("")
+					total.Text =NumberFormat(price,0,3) & " تومان"
+					total.TextColor = Colors.rgb(76, 175, 80)
+					total.Typeface = yekanfont
+					total.Gravity = Gravity.LEFT
+					cat_productlist(pageflag).panel.AddView(total,180dip,topseting+135dip,100%x-190dip,25dip)
+					
+					Try
+						Dim image As String=extra.image_address & image.Replace(".jpg","-600x600.jpg")
+					
+						Dim filename As String = image.SubString(image.LastIndexOf("/")+1)
+						If File.Exists(File.DirInternalCache,filename) =True Then
+							cat_product_img(pageflag).Initialize("")
+							cat_product_img(pageflag).Gravity = Gravity.FILL
+							cat_product_img(pageflag).Bitmap = LoadBitmap(File.DirInternalCache,filename)
+							cat_productlist(pageflag).panel.AddView(cat_product_img(pageflag),10dip,topseting+4dip,160dip,160dip)
+					
+						Else
+							extra.main_download_category_list(pageflag,image)
+							cat_product_img(pageflag).Initialize("")
+							cat_product_img(pageflag).Gravity = Gravity.FILL
+							cat_product_img(pageflag).Bitmap = LoadBitmap(File.DirAssets,"main_defult_product.jpg")
+							cat_productlist(pageflag).panel.AddView(cat_product_img(pageflag),10dip,topseting+4dip,160dip,160dip)
+						End If
+					
+					Catch
+						Log(LastException)
+					End Try
+''					
+					topseting = topseting + 175dip
+					list_height(pageflag) = topseting
+					Log(topseting)
 				Next
 				Pagerc.Initialize2(Containerc, "Pagerc")
+				categoryscroll.Panel.AddView(Pagerc,0,50dip,100%x,100%y-55dip)
 				
-				categoryscroll.Panel.AddView(Pagerc,0,55dip,100%x,100%y-55dip)
 				
-				Log(" page cound " & pagecountflag)
-				categoryscroll.Panel.Height = 100%y
+				cat_productlist(1).Panel.Height=	list_height(1)+ 110dip
+				cat_productlist(2).Panel.Height=	list_height(2)+ 110dip
+				Log(cat_productlist(1).Panel.Height)
+				Log(cat_productlist(2).Panel.Height)
+				Log(" page cound " & extra.pagecountflag)
+				categoryscroll.Panel.Height = 100%y-55dip
 				categoryscroll.Panel.Color = Colors.White
  			
 			Case "subcategory"
@@ -271,8 +327,7 @@ If job.Success = True Then
 					
 					productheader.Initialize(100%x,"")
 					productheader.Color=Colors.rgb(75, 231, 200)
-					Dim yekanfont As Typeface
-					yekanfont = Typeface.LoadFromAssets("yekan.ttf")
+					
 					categoryscroll.Panel.AddView(productheader,0,0,100%x,50dip)
 					
 					Dim r As Reflector
@@ -287,7 +342,7 @@ If job.Success = True Then
 						
 						cat_title(flagt).Initialize("cat_title")
 						cat_title(flagt).Text = name
-						cat_title(flagt).Tag = flagt
+						cat_title(flagt).Tag = flagt 
 						cat_title(flagt).Gravity = Gravity.CENTER
 						cat_title(flagt).TextColor = Colors.Black
 						cat_title(flagt).Typeface = yekanfont
@@ -321,24 +376,14 @@ If job.Success = True Then
 					Dim image As String = colroot.Get("image")
 					Dim name As String = colroot.Get("name")
 					Dim id As String = colroot.Get("id")
-					Dim filename As String
-					filename = image.SubString(image.LastIndexOf("/")+1)
-					Log(filename)
-'					Dim lable As Label
-'					lable.Initialize("")
-'					lable.Text = name
-'					'lable.Color = Colors.White
-'					lable.TextColor = Colors.Black
-'					lable.Typeface = Typeface.LoadFromAssets("yekan.ttf")
-'					lable.Gravity = Gravity.RIGHT
-'					lable.TextSize = 9dip
-'					categoryscroll.Panel.AddView(lable,35%x,topset-10dip,65%x-15dip,25dip)
-'					
-'					
+					Dim Filename As String
+					Filename = image.SubString(image.LastIndexOf("/")+1)
+					Log(Filename)
+
 
 					categoryimg(flag).Initialize("categoryitem")
-					If File.Exists(File.DirInternalCache,filename) = True Then
-							categoryimg(flag).Bitmap = LoadBitmap(File.DirInternalCache,filename)
+					If File.Exists(File.DirInternalCache,Filename) = True Then
+							categoryimg(flag).Bitmap = LoadBitmap(File.DirInternalCache,Filename)
 						Else
 							categoryimg(flag).Bitmap = LoadBitmap(File.DirAssets,"main_defult_product.jpg")
 						extra.main_download_categorypic(flag,extra.image_address_nc &image)
@@ -500,6 +545,22 @@ If job.Success = True Then
 						File.Copy2(job.GetInputStream,OutStream)
 						OutStream.Close
 						categoryimg(index).Bitmap = LoadBitmap(File.DirInternalCache, name)
+					End If
+				Catch
+					Log("error downloadimglastproc job")
+				End Try
+				
+				Try
+					If job.JobName.SubString2(0,18)="downloadimgcatlist" Then
+						Dim index As Int
+						Dim name As String
+						index = job.JobName.SubString2(job.JobName.IndexOf("*")+1,job.JobName.LastIndexOf("*"))
+						name = job.JobName.SubString(job.JobName.LastIndexOf("/")+1)
+						Dim OutStream As OutputStream
+						OutStream = File.OpenOutput(File.DirInternalCache, name, False)
+						File.Copy2(job.GetInputStream,OutStream)
+						OutStream.Close
+						cat_product_img(index).Bitmap = LoadBitmap(File.DirInternalCache, name)
 					End If
 				Catch
 					Log("error downloadimglastproc job")
@@ -862,37 +923,28 @@ Sub index_draw(size As String,flag,id,img,model)
 	lbl.Gravity = Gravity.CENTER
 	panel.Tag = id
 	
-	
-	
 	Dim imgfile As String = img.SubString2(img.LastIndexOf("/")+1,img.Length)
 	'Log("file:" & imgfile)
 	If File.Exists (File.DirInternalCache,"product/" & imgfile) = False Then
-		
 		imgdrew(flag).Initialize("imgdrew")
 		imgdrew(flag).Bitmap = LoadBitmapSample(File.DirAssets,"fileset/main_defult_product.jpg",100dip,100dip)
 		
 		imgdrew(flag).Tag = id  
 		imgdrew(flag).Gravity = Gravity.FILL
 		extra.download_image(id,img,flag)
-		
 	Else
-		 
 		imgdrew(flag).Initialize("imgdrew")
 		imgdrew(flag).Bitmap = LoadBitmapSample(File.DirInternalCache, "product/" & imgfile,100dip,100dip)
 		imgdrew(flag).Gravity = Gravity.FILL
 		imgdrew(flag).Tag =  id 
-		'Log("cach : " & img)
 	End If
-	
 	index_ScrollView.Panel.AddView(panel,left_draw,extra.index_ob_top + space,width_draw-space,width_draw-space)
 	
 	index_ScrollView.Panel.AddView(imgdrew(flag),left_draw,extra.index_ob_top + space,width_draw-space,width_draw-space)
-	
 	index_ScrollView.Panel.AddView(lbl,left_draw,extra.index_ob_top + width_draw-25dip,width_draw-space,25dip)
 	extra.index_ob_top = extra.index_ob_top + extra.index_ob_top_cach
 	index_ScrollView.Panel.Height = extra.index_ob_top  +space 
 End Sub
-
 Sub imgdrew_click()
 	Dim imgdre As ImageView
 	imgdre = Sender
@@ -906,14 +958,10 @@ Sub imgdrew_click()
 	extra.flag_procpnl = extra.flag_procpnl+ 1
 	'Activity_Create(True)
 End Sub
-
 Sub loadroc(flag As Int)
-	
-	
 	headerproc(flag).Initialize("")
 	headerproc(flag).Color = Colors.rgb(26, 188, 156)
 	Activity.AddView(headerproc(flag),0,0,100%x,55dip)
-	
 	
 	headerproctxt(flag).Initialize("")
 	headerproctxt(flag).Gravity = Bit.Or(Gravity.CENTER_VERTICAL,Gravity.RIGHT)
@@ -922,13 +970,10 @@ Sub loadroc(flag As Int)
 	headerproctxt(flag).Text = "در حال بارگزاری"
 	headerproctxt(flag).TextColor = Colors.White
 	headerproc(flag).AddView(headerproctxt(flag),0,5dip,95%x,50dip)
-	
-	
-	
+		
 	Dim download As HttpJob
 	download.Initialize("nameproc" & flag,Me)
 	download.PostString(extra.api,"op=product&id=" & extra.product_id_toshow)
-	
 	
 	Dim downloadtext As HttpJob
 	downloadtext.Initialize("textproc"  & flag ,Me)
@@ -973,16 +1018,10 @@ Sub loadroc(flag As Int)
 	
 	moretext_data = "در حال بارگذاری"
 
-
-
-	
 	Dim pnl4_line As Panel
 	pnl4_line.Initialize("")
 	pnl4_line.Color = Colors.rgb(179, 179, 179)
 	product_ScrollView(flag).Panel.AddView(pnl4_line,30dip,50%x+164.5dip + 48dip+310dip+185dip +15dip,100%x-60dip,1dip)
-	
-
-	
 	
 	Dim moretext As Label
 	moretext.Initialize("moretext")
@@ -1022,9 +1061,6 @@ Sub loadroc(flag As Int)
 	buyicon.Text = FAe.GetFontAwesomeIconByName("fa-cart-plus")
 	product_ScrollView(flag).Panel.AddView(buyicon,70%x,50%x+420dip,20%x,50dip)
 	
-
-	
-
 	Private FA As FontAwesome
 	FA.Initialize
 	Dim properticon As Label
@@ -1047,7 +1083,6 @@ Sub loadroc(flag As Int)
 	pic_like.Gravity = Gravity.FILL
 	pic_like.Bitmap = LoadBitmap(File.DirAssets,"like.png")
 	
-	
 	Dim color As Label
 	color.Initialize("")
 	color.TextColor = Colors.rgb(140, 140, 140)
@@ -1057,7 +1092,6 @@ Sub loadroc(flag As Int)
 	color.TextSize = 9dip
 	product_ScrollView(flag).Panel.AddView(color,0,50%x+270dip,100%x-35dip,80dip)
 	
-	
 	Dim garanti As Label
 	garanti.Initialize("")
 	garanti.TextColor = Colors.rgb(140, 140, 140)
@@ -1066,7 +1100,6 @@ Sub loadroc(flag As Int)
 	garanti.Text = "گارانتی"
 	garanti.TextSize = 9dip
 	product_ScrollView(flag).Panel.AddView(garanti,0,50%x+310dip,100%x-35dip,80dip)
-
 	
 	Dim saler As Label
 	saler.Initialize("")
@@ -1076,7 +1109,6 @@ Sub loadroc(flag As Int)
 	saler.Text = "فروشنده"
 	saler.TextSize = 9dip
 	
-	
 	Dim header_title As Label
 	header_title.Initialize("")
 
@@ -1085,12 +1117,10 @@ Sub loadroc(flag As Int)
 	header_title.TextColor = Colors.red
 	header_title.TextSize = 11dip
 	header_title.Visible = False
-	'product_header.AddView(header_title,0,5dip,95%x,45dip)
 
 	product_ScrollView(flag).Panel.AddView(saler,0,50%x+350dip,100%x-35dip,80dip)
 	product_ScrollView(flag).Panel.AddView(pic_sheare,30dip,50%x+70dip,18dip,18dip)
 	product_ScrollView(flag).Panel.AddView(pic_like,80dip,50%x+70dip,18dip,18dip)
-	'product_header.BringToFront
 	product_ScrollView(flag).Panel.Height = 2125
 End Sub
 
@@ -1105,7 +1135,6 @@ Sub lastproduct_ImageView_click()
 	loadroc(extra.flag_procpnl)
 	extra.flag_procpnl = extra.flag_procpnl + 1
 End Sub
-
 Sub propert_click()
 	Dim propert As Label
 	Dim temp As String
@@ -1158,7 +1187,6 @@ Sub propert_click()
 			property_pnl.Panel.AddView(lblnodata,70%x,topset+30dip,30%x-5dip,30dip)
 
 			topset = topset + 65dip
-				
 			property_pnl.Panel.Height = topset
 		Next
 	Catch
@@ -1175,36 +1203,22 @@ Sub createnon()
 	lblnodata.Typeface = Typeface.LoadFromAssets("yekan.ttf")
 	property_pnl.Panel.AddView(lblnodata,0,0,100%x,50%x)
 End Sub
-
-
 Sub sharepost_click()
 	Dim pic_sheare As ImageView
 	pic_sheare = Sender
 	extra.programsharepost(pic_sheare.tag)
 End Sub
-
-
-
 Sub menubtn_Click
 	navi.OpenDrawer2(navi.GRAVITY_RIGHT)
 End Sub
-
 Sub menuporfrosh_Click
-	
 End Sub
-
 Sub menutakhfif_Click
-	
 End Sub
-
 Sub menufantast_Click
-	
 End Sub
-
 Sub menunew_Click
-	
 End Sub
-
 Sub menuhome_Click
 	navi.CloseDrawer2(navi.GRAVITY_END)
 	index_ScrollView.Panel.RemoveAllViews
@@ -1215,7 +1229,6 @@ Sub menuhome_Click
 	extra.index_ob_top_cach = 0
 	extra.propertyjson = 0
 End Sub
-
 Sub menucategory_Click
 	categoryscroll.Panel.RemoveAllViews
 	navi.CloseDrawer2(navi.GRAVITY_END)
@@ -1228,7 +1241,6 @@ Sub menucategory_Click
 	 download.Initialize("categorypage",Me)
 	download.PostString(extra.api,"op=getcategory")
 End Sub
-
 Sub catmenubtn_Click
 	navi.CloseDrawer2(navi.GRAVITY_END)
 	Dim  a As Animation
@@ -1236,11 +1248,9 @@ Sub catmenubtn_Click
 	a.Duration = 500
 	a.Start(categorypnl)
 End Sub
-
 Sub animationexitcategory_AnimationEnd
 	categorypnl.Visible = False
 End Sub
-
 Sub categoryitem_Click
 	Dim imgdre As ImageView
 	imgdre = Sender
@@ -1250,17 +1260,23 @@ Sub categoryitem_Click
 	download.Initialize("subcategory",Me)
 	download.PostString(extra.api,"op=getsubcategory&id="& imgdre.Tag)
 
-
 	Dim download2 As HttpJob
 	download2.Initialize("getsubcategorydescription",Me)
 	download2.PostString (extra.api,"op=getsubcategorydescription&id=" & imgdre.Tag)
-	
 End Sub
-
 Sub cat_title_Click
 	Dim target As Label
 	target = Sender
-	'cat_title_line.SetLayoutAnimated(300,target.Left,cat_title_line.Top, target.Width,2dip)
 	productheader.ScrollPosition=target.Left 
 	Pagerc.GotoPage(target.Tag,True)
+End Sub
+Sub cat_productlist_go_Click
+	Dim panel As Panel
+	panel = Sender
+	extra.product_id_toshow = panel.Tag
+	product_ScrollView(extra.flag_procpnl).Initialize(500)
+	product_ScrollView(extra.flag_procpnl).Color = Colors.rgb(250, 250, 250)
+	Activity.AddView(product_ScrollView(extra.flag_procpnl),0,0,100%x,100%y)
+	loadroc(extra.flag_procpnl)
+	extra.flag_procpnl = extra.flag_procpnl + 1
 End Sub
